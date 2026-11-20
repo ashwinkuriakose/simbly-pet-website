@@ -1,0 +1,240 @@
+---
+import { Image } from 'astro:assets';
+import Icon from './Icon.astro';
+import logo from '../assets/logo-mark.png';
+import site from '../content/site.json';
+---
+<!-- Floating pill header. On phones the links open in a dropdown card under the pill. -->
+<header class="nav" data-nav>
+  <div class="nav__pill">
+    <a href="#top" class="brand" aria-label="Simbly Pet home">
+      <Image src={logo} alt="" width={72} height={72} class="brand__mark" loading="eager" />
+      <span class="brand__word">Simbly<span>Pet</span></span>
+    </a>
+
+    <nav class="nav__links" aria-label="Main">
+      {site.nav.map((item) => <a href={item.href}>{item.label}</a>)}
+    </nav>
+
+    <div class="nav__actions">
+      <a class="nav__biz" href={site.links.businessPortal}>For businesses</a>
+      <a class="btn btn--yellow nav__get" href="#download">Get the app</a>
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu" data-menu-toggle>
+        <span class="bars" aria-hidden="true"><i></i><i></i></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="menu" id="mobile-menu" data-menu hidden>
+    <nav aria-label="Mobile">
+      {site.nav.map((item, i) => (
+        <a href={item.href} style={`--i:${i}`}>
+          {item.label}<Icon name="arrow-right" size={18} />
+        </a>
+      ))}
+    </nav>
+    <div class="menu__ctas">
+      <a class="btn btn--yellow" href="#download">Get the app</a>
+      <a class="btn btn--ghost" href={site.links.businessPortal}>For businesses <Icon name="arrow-up-right" size={18} /></a>
+    </div>
+  </div>
+</header>
+
+<style>
+  .nav {
+    position: fixed;
+    inset: 14px 0 auto;
+    z-index: 50;
+    padding-inline: var(--gutter);
+    pointer-events: none;
+  }
+  .nav__pill,
+  .menu {
+    pointer-events: auto;
+    max-width: 1120px;
+    margin-inline: auto;
+  }
+  .nav__pill {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    height: 64px;
+    padding: 0 8px 0 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.86);
+    backdrop-filter: saturate(1.6) blur(16px);
+    -webkit-backdrop-filter: saturate(1.6) blur(16px);
+    border: 1px solid var(--line);
+    box-shadow: 0 6px 24px -12px rgba(10, 10, 10, 0.18);
+    transition: box-shadow 0.4s var(--ease), max-width 0.6s var(--ease), height 0.4s var(--ease);
+  }
+  .nav.is-scrolled .nav__pill {
+    max-width: 1000px;
+    height: 58px;
+    box-shadow: 0 14px 40px -14px rgba(10, 10, 10, 0.3);
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    margin-right: auto;
+  }
+  .brand__mark {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+  }
+  .brand__word {
+    font: 800 1.3rem/1 var(--font-display);
+    letter-spacing: -0.03em;
+  }
+  .brand__word span {
+    font-weight: 500;
+  }
+  .nav__links {
+    display: flex;
+    gap: 2px;
+  }
+  .nav__links a {
+    position: relative;
+    padding: 8px 14px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: rgba(10, 10, 10, 0.72);
+    transition: color 0.2s, background-color 0.2s;
+  }
+  .nav__links a:hover {
+    color: var(--ink);
+    background: var(--yellow-tint);
+  }
+  .nav__actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: auto;
+  }
+  .nav__biz {
+    padding: 8px 14px;
+    font-weight: 650;
+    font-size: 0.9375rem;
+    text-decoration: none;
+    border-radius: 999px;
+    transition: background-color 0.2s;
+  }
+  .nav__biz:hover {
+    background: rgba(10, 10, 10, 0.06);
+  }
+  .nav__get {
+    min-height: 48px;
+    padding: 0 20px;
+    font-size: 0.9375rem;
+  }
+  .nav__toggle {
+    display: none;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 0;
+    background: var(--ink);
+    place-items: center;
+    cursor: pointer;
+  }
+  .bars {
+    display: grid;
+    gap: 6px;
+    width: 18px;
+  }
+  .bars i {
+    display: block;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--paper);
+    transition: transform 0.35s var(--ease);
+  }
+  .nav__toggle[aria-expanded='true'] .bars i:first-child {
+    transform: translateY(4px) rotate(45deg);
+  }
+  .nav__toggle[aria-expanded='true'] .bars i:last-child {
+    transform: translateY(-4px) rotate(-45deg);
+  }
+
+  .menu {
+    margin-top: 8px;
+    padding: 10px;
+    border-radius: 28px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-lg);
+    animation: menu-in 0.35s var(--ease);
+  }
+  .menu nav {
+    display: grid;
+  }
+  .menu nav a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 14px;
+    border-radius: 16px;
+    font: 700 1.25rem/1.2 var(--font-display);
+    letter-spacing: -0.02em;
+    text-decoration: none;
+    animation: item-in 0.4s var(--ease) both;
+    animation-delay: calc(var(--i) * 40ms);
+  }
+  .menu nav a:hover {
+    background: var(--yellow-tint);
+  }
+  .menu nav a :global(svg) {
+    opacity: 0.4;
+  }
+  .menu__ctas {
+    display: grid;
+    gap: 8px;
+    padding: 10px 4px 4px;
+  }
+  @keyframes menu-in {
+    from {
+      opacity: 0;
+      transform: translateY(-8px) scale(0.98);
+    }
+  }
+  @keyframes item-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+  }
+
+  @media (max-width: 1040px) {
+    .nav__links {
+      display: none;
+    }
+  }
+  @media (max-width: 720px) {
+    .nav {
+      inset-block-start: 10px;
+      padding-inline: 12px;
+    }
+    .nav__biz,
+    .nav__get {
+      display: none;
+    }
+    .nav__toggle {
+      display: grid;
+    }
+    .nav__pill,
+    .nav.is-scrolled .nav__pill {
+      height: 60px;
+      padding: 0 6px 0 8px;
+    }
+  }
+  @media (min-width: 721px) {
+    .menu {
+      display: none !important;
+    }
+  }
+</style>

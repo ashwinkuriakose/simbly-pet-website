@@ -1,0 +1,433 @@
+---
+import { Image } from 'astro:assets';
+import Icon from './Icon.astro';
+import site from '../content/site.json';
+import dog from '../assets/pet-profile.jpg';
+import cat from '../assets/cat-profile.jpg';
+import corgi from '../assets/corgi.jpg';
+
+const { features } = site;
+---
+<section class="features section" id="features">
+  <div class="container">
+    <header class="features__head">
+      <p class="eyebrow" data-reveal>{features.eyebrow}</p>
+      <h2 class="h2" data-reveal style="--d:1">{features.title}</h2>
+    </header>
+
+    <div class="bento">
+      {features.items.map((f, i) => (
+        <article class={`card card--${f.key}`} data-reveal style={`--d:${i % 3}`}>
+          <div class="card__art" aria-hidden="true">
+            {f.key === 'health' && (
+              <div class="art-health">
+                <div class="row"><span class="dot"><Icon name="syringe" size={16} /></span><b>Rabies</b><em>Next 14 Mar 2027</em><Icon name="check" size={18} class="ok" /></div>
+                <div class="row"><span class="dot"><Icon name="pill" size={16} /></span><b>Deworming</b><em>Every 3 months</em><Icon name="check" size={18} class="ok" /></div>
+                <div class="row"><span class="dot"><Icon name="weight" size={16} /></span><b>Weight</b><em>28.4 kg</em><span class="up">+0.6</span></div>
+              </div>
+            )}
+            {f.key === 'reminders' && (
+              <div class="art-stack">
+                <div class="note n3"><Icon name="bell" size={16} /> Flea treatment · 18 Apr</div>
+                <div class="note n2"><Icon name="bell" size={16} /> Deworming · 2 Apr</div>
+                <div class="note n1"><Icon name="bell-ring" size={16} /> <b>Rabies booster · in 12 days</b></div>
+              </div>
+            )}
+            {f.key === 'family' && (
+              <div class="art-family">
+                <div class="faces">
+                  <span style="--c:#ffbb03">A</span><span style="--c:#0a0a0a;--t:#ffbb03">R</span><span style="--c:#ffe08a">M</span>
+                  <span class="add"><Icon name="user-plus" size={18} /></span>
+                </div>
+                <div class="roles"><span>Owner</span><span>Co-owner</span><span>Family</span></div>
+              </div>
+            )}
+            {f.key === 'species' && (
+              <div class="art-species">
+                <Image src={dog} alt="" width={120} height={120} />
+                <Image src={cat} alt="" width={120} height={120} />
+                <Image src={corgi} alt="" width={120} height={120} />
+              </div>
+            )}
+            {f.key === 'booking' && (
+              <div class="art-times">
+                <span>09:00</span><span class="on">10:00</span><span>11:30</span><span>14:00</span><span>15:30</span><span>17:00</span>
+              </div>
+            )}
+            {f.key === 'updates' && (
+              <div class="art-photos">
+                <figure class="p1"><Image src={corgi} alt="" width={260} height={260} /><figcaption>After groom</figcaption></figure>
+                <figure class="p2"><Image src={cat} alt="" width={260} height={260} /><figcaption>Day 2 at boarding</figcaption></figure>
+                <figure class="p3"><Image src={dog} alt="" width={260} height={260} /><figcaption>Playtime</figcaption></figure>
+              </div>
+            )}
+          </div>
+          <div class="card__copy">
+            <span class="card__icon"><Icon name={f.icon} size={20} /></span>
+            <h3>{f.title}</h3>
+            <p>{f.body}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .features__head {
+    display: grid;
+    gap: 16px;
+    max-width: 760px;
+    margin-bottom: clamp(40px, 6vw, 72px);
+  }
+  .bento {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 28px;
+    min-height: 380px;
+    padding: 28px;
+    border-radius: var(--radius-lg);
+    background: var(--cream);
+    border: 1px solid var(--line);
+    overflow: hidden;
+    transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease);
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow);
+  }
+  .card--health {
+    grid-column: span 2;
+    background: var(--yellow);
+    border-color: transparent;
+  }
+  .card--updates {
+    grid-column: span 3;
+    background: var(--ink);
+    color: var(--paper);
+    border-color: transparent;
+    flex-direction: row-reverse;
+    align-items: center;
+    min-height: 0;
+  }
+  .card--updates .card__copy {
+    max-width: 380px;
+  }
+  .card--updates p {
+    color: var(--muted-on-dark);
+  }
+  .card__copy {
+    display: grid;
+    gap: 10px;
+  }
+  .card__icon {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    margin-bottom: 6px;
+  }
+  .card--health .card__icon {
+    border-color: transparent;
+  }
+  .card--updates .card__icon {
+    background: var(--yellow);
+    color: var(--ink);
+  }
+  .card h3 {
+    font-size: clamp(1.5rem, 2.2vw, 1.875rem);
+  }
+  .card p {
+    color: var(--muted);
+    max-width: 44ch;
+  }
+  .card--health p {
+    color: rgba(10, 10, 10, 0.75);
+  }
+  .card__art {
+    flex: 1;
+    display: grid;
+    place-items: center;
+  }
+
+  /* Card art */
+  .art-health {
+    width: 100%;
+    max-width: 520px;
+    display: grid;
+    gap: 10px;
+    justify-self: end;
+  }
+  .art-health .row {
+    display: grid;
+    grid-template-columns: auto auto 1fr auto;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    background: var(--paper);
+    border-radius: 16px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+    transition: transform 0.5s var(--ease);
+  }
+  .card--health:hover .row:nth-child(2) {
+    transform: translateX(-10px);
+  }
+  .card--health:hover .row:nth-child(3) {
+    transform: translateX(-20px);
+  }
+  .art-health .dot {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    background: var(--yellow-tint);
+  }
+  .art-health em {
+    font-style: normal;
+    color: var(--muted);
+    font-size: 0.875rem;
+    text-align: right;
+  }
+  .art-health :global(.ok) {
+    color: var(--green);
+  }
+  .art-health .up {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--green);
+  }
+  .art-stack {
+    position: relative;
+    width: 100%;
+    height: 150px;
+  }
+  .note {
+    position: absolute;
+    left: 50%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 92%;
+    padding: 14px 16px;
+    border-radius: 16px;
+    background: var(--paper);
+    box-shadow: var(--shadow);
+    font-size: 0.9rem;
+    transition: transform 0.5s var(--ease);
+  }
+  .note.n1 {
+    bottom: 0;
+    transform: translateX(-50%);
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .note.n1 :global(svg) {
+    color: var(--yellow);
+  }
+  .note.n2 {
+    bottom: 34px;
+    transform: translateX(-50%) scale(0.94);
+    opacity: 0.9;
+  }
+  .note.n3 {
+    bottom: 66px;
+    transform: translateX(-50%) scale(0.88);
+    opacity: 0.7;
+  }
+  .card--reminders:hover .n2 {
+    transform: translateX(-50%) translateY(-14px) scale(0.94);
+  }
+  .card--reminders:hover .n3 {
+    transform: translateX(-50%) translateY(-28px) scale(0.88);
+  }
+  .art-family {
+    display: grid;
+    justify-items: center;
+    gap: 18px;
+  }
+  .faces {
+    display: flex;
+  }
+  .faces span {
+    display: grid;
+    place-items: center;
+    width: 64px;
+    height: 64px;
+    margin-left: -14px;
+    border-radius: 50%;
+    border: 4px solid var(--cream);
+    background: var(--c);
+    color: var(--t, var(--ink));
+    font: 750 1.375rem var(--font-display);
+    transition: margin 0.5s var(--ease);
+  }
+  .faces span:first-child {
+    margin-left: 0;
+  }
+  .card--family:hover .faces span {
+    margin-left: -4px;
+  }
+  .card--family:hover .faces span:first-child {
+    margin-left: 0;
+  }
+  .faces .add {
+    background: var(--paper);
+    border-style: dashed;
+    border-color: rgba(10, 10, 10, 0.25);
+  }
+  .roles {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+  }
+  .roles span,
+  .art-times span {
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+  .art-species {
+    display: flex;
+    align-items: center;
+  }
+  .art-species img,
+  .art-species .more {
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--cream);
+    margin-left: -16px;
+    transition: transform 0.5s var(--ease);
+  }
+  .art-species img:first-child {
+    margin-left: 0;
+  }
+  .art-species .more {
+    display: grid;
+    place-items: center;
+    background: var(--ink);
+    color: var(--yellow);
+    font: 750 1.25rem var(--font-display);
+  }
+  .card--species:hover img:nth-child(1) {
+    transform: translateY(-8px) rotate(-6deg);
+  }
+  .card--species:hover img:nth-child(2) {
+    transform: translateY(4px);
+  }
+  .card--species:hover img:nth-child(3) {
+    transform: translateY(-6px) rotate(6deg);
+  }
+  .art-times {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .art-times span {
+    text-align: center;
+  }
+  .art-times .on {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+  .art-photos {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    padding: 8px;
+  }
+  .art-photos figure {
+    margin: 0;
+    width: clamp(140px, 17vw, 200px);
+    padding: 8px 8px 12px;
+    background: var(--paper);
+    color: var(--ink);
+    border-radius: 18px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-align: center;
+    transition: transform 0.6s var(--ease);
+  }
+  .art-photos img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 8px;
+  }
+  .p1 {
+    transform: rotate(-6deg) translateY(10px);
+  }
+  .p2 {
+    transform: rotate(2deg) translateY(-6px);
+  }
+  .p3 {
+    transform: rotate(7deg) translateY(12px);
+  }
+  .card--updates:hover .p1 {
+    transform: rotate(-2deg);
+  }
+  .card--updates:hover .p2 {
+    transform: rotate(0) translateY(-12px);
+  }
+  .card--updates:hover .p3 {
+    transform: rotate(3deg);
+  }
+
+  @media (max-width: 960px) {
+    .bento {
+      grid-template-columns: 1fr 1fr;
+    }
+    .card--health,
+    .card--updates {
+      grid-column: span 2;
+    }
+    .card--updates {
+      flex-direction: column-reverse;
+      align-items: stretch;
+    }
+  }
+  @media (max-width: 640px) {
+    .bento {
+      grid-template-columns: 1fr;
+    }
+    .card--health,
+    .card--updates {
+      grid-column: auto;
+    }
+    .card {
+      min-height: 0;
+      padding: 22px;
+    }
+    .art-health em {
+      display: none;
+    }
+    .art-health .row {
+      grid-template-columns: auto 1fr auto;
+    }
+    .art-photos {
+      gap: 0;
+    }
+    .art-photos figure {
+      width: 38%;
+      margin-inline: -2%;
+    }
+  }
+</style>

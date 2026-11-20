@@ -1,0 +1,218 @@
+{
+  "meta": {
+    "title": "Simbly Pet: Pet Care Made Simbly Effortless",
+    "description": "Keep your pet's health records, vaccinations and reminders in one place, share them with family, and book grooming, boarding and daycare with trusted local businesses."
+  },
+  "links": {
+    "businessPortal": "https://business.simblypet.com",
+    "appStore": "",
+    "googlePlay": ""
+  },
+  "appStatus": "coming-soon",
+  "nav": [
+    {
+      "label": "Features",
+      "href": "#features"
+    },
+    {
+      "label": "How it works",
+      "href": "#how"
+    },
+    {
+      "label": "Services",
+      "href": "#services"
+    },
+    {
+      "label": "For businesses",
+      "href": "#business"
+    },
+    {
+      "label": "FAQ",
+      "href": "#faq"
+    }
+  ],
+  "hero": {
+    "eyebrow": "The pet-care app for dogs and cats",
+    "titleLines": [
+      "Pet care made",
+      "Simbly",
+      "effortless."
+    ],
+    "subtitle": "Health records, vaccination reminders and bookings with trusted groomers, boarders and daycares, all in one app you can share with the whole family.",
+    "primaryCta": "Get the app",
+    "secondaryCta": "For businesses"
+  },
+  "highlights": [
+    "Dogs",
+    "Cats",
+    "Health records",
+    "Vaccinations",
+    "Reminders",
+    "Grooming",
+    "Boarding",
+    "Daycare"
+  ],
+  "statement": "One home for your pet's health, care and every booking, shared with everyone who loves them.",
+  "features": {
+    "eyebrow": "Features",
+    "title": "Everything your pet needs, in your pocket",
+    "items": [
+      {
+        "key": "health",
+        "icon": "syringe",
+        "title": "Health records that stay with them",
+        "body": "Vaccinations, deworming, medications, checkups, allergies and weight, kept in one tidy timeline you can pull up at any clinic."
+      },
+      {
+        "key": "reminders",
+        "icon": "bell-ring",
+        "title": "Reminders that set themselves",
+        "body": "Log a vaccination with its next due date and the reminder is created for you."
+      },
+      {
+        "key": "family",
+        "icon": "users",
+        "title": "Share with family",
+        "body": "Invite a co-owner or family member so everyone sees the same records and reminders."
+      },
+      {
+        "key": "species",
+        "icon": "paw-print",
+        "title": "Made for dogs and cats",
+        "body": "Profiles, health records and reminders built around dogs and cats, whether you have one pet or a house full of both."
+      },
+      {
+        "key": "booking",
+        "icon": "calendar-check",
+        "title": "Book trusted services",
+        "body": "Request grooming, boarding or daycare with verified local businesses and get a confirmed time back."
+      },
+      {
+        "key": "updates",
+        "icon": "camera",
+        "title": "Photo updates and reports",
+        "body": "Before-and-after grooming photos and updates during a stay, sent straight to your phone."
+      }
+    ]
+  },
+  "how": {
+    "eyebrow": "How it works",
+    "title": "From first vaccine to every visit",
+    "steps": [
+      {
+        "title": "Add your pet",
+        "body": "Create a profile with species, breed, birthday and microchip. Add as many pets as you have."
+      },
+      {
+        "title": "Keep their health history",
+        "body": "Record vaccinations, deworming, medications and weight, with documents attached, so nothing lives on scraps of paper."
+      },
+      {
+        "title": "Never miss a due date",
+        "body": "Next due dates become reminders automatically, and everyone you've shared the pet with stays in the loop."
+      },
+      {
+        "title": "Book in a couple of taps",
+        "body": "Pick a service from a verified business, choose a time and send a request. The business confirms or suggests another slot."
+      },
+      {
+        "title": "See how their day went",
+        "body": "Get grooming reports with before-and-after photos, and photo updates while they're boarding."
+      }
+    ]
+  },
+  "services": {
+    "eyebrow": "Services",
+    "title": "Trusted local businesses, one app",
+    "subtitle": "Every business on Simbly Pet is reviewed and verified by our team before it can take bookings.",
+    "items": [
+      {
+        "icon": "scissors",
+        "title": "Grooming",
+        "body": "Baths, haircuts and nail trims, with a report and before-and-after photos when it's done.",
+        "tag": "Available"
+      },
+      {
+        "icon": "house",
+        "title": "Boarding",
+        "body": "Overnight stays with your care instructions, check-in and check-out times, and photo updates.",
+        "tag": "Available"
+      },
+      {
+        "icon": "sun",
+        "title": "Daycare",
+        "body": "Daytime care while you're busy. Book a day, drop off, and see how it went.",
+        "tag": "Available"
+      },
+      {
+        "icon": "stethoscope",
+        "title": "Vet clinics",
+        "body": "Clinic visits that go straight into your pet's health history.",
+        "tag": "Coming soon"
+      }
+    ]
+  },
+  "business": {
+    "eyebrow": "For businesses",
+    "title": "Run your pet business, simbly.",
+    "subtitle": "Groomers, boarders and daycares use Simbly Pet to take bookings, organise their team and keep pet parents happy.",
+    "points": [
+      {
+        "icon": "calendar-days",
+        "title": "Bookings and calendar",
+        "body": "Accept requests, add walk-ins and see the whole day at a glance."
+      },
+      {
+        "icon": "users",
+        "title": "Staff and branches",
+        "body": "Roles and permissions for every team member, across every branch."
+      },
+      {
+        "icon": "clipboard-list",
+        "title": "Customers and pets",
+        "body": "Every pet's details and history, ready before they arrive."
+      },
+      {
+        "icon": "camera",
+        "title": "Reports parents love",
+        "body": "Send grooming reports and stay photo updates from your phone."
+      }
+    ],
+    "cta": "Register your business",
+    "secondary": "Business sign in"
+  },
+  "faq": {
+    "eyebrow": "FAQ",
+    "title": "Questions, answered",
+    "items": [
+      {
+        "q": "Which pets does Simbly Pet support?",
+        "a": "Simbly Pet is built for dogs and cats. Add as many as you have, and share each one with your family."
+      },
+      {
+        "q": "Can my family see my pet's records?",
+        "a": "Yes. Invite a co-owner or family member and they'll see the same profile, health history and reminders. You decide who has access."
+      },
+      {
+        "q": "How are businesses checked?",
+        "a": "Every business applies with its details and documents, and our team reviews them before the business can accept bookings."
+      },
+      {
+        "q": "How is a booking priced?",
+        "a": "Each business sets its own prices for its services. You'll see the price before you send a booking request."
+      },
+      {
+        "q": "I run a pet business. How do I join?",
+        "a": "Register at business.simblypet.com. Once your business is verified, you can set up services, branches and staff and start taking bookings."
+      }
+    ]
+  },
+  "cta": {
+    "title": "Give your pet the care they deserve, without the effort.",
+    "subtitle": "The Simbly Pet app is coming soon to iPhone and Android."
+  },
+  "footer": {
+    "tagline": "Pet Care Made Simbly Effortless.",
+    "copyright": "Simbly Pet"
+  }
+}

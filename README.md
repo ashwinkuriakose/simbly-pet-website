@@ -1,0 +1,35 @@
+# Simbly Pet website
+
+The public marketing site for [simblypet.com](https://simblypet.com), built with [Astro](https://astro.build). It builds to plain static files.
+
+## Run locally
+
+```bash
+npm install
+npm run dev        # http://127.0.0.1:4321 (Astro runs it in the background; `npx astro dev stop` stops it)
+npm run build      # outputs static files to dist/
+npm run preview    # serves dist/ to check the production build
+```
+
+Requires Node 22 or later.
+
+## Editing content
+
+All page text, links and FAQ entries live in [`src/content/site.json`](src/content/site.json). Layout code reads from it, so copy changes don't need component edits (and a CMS can write this file later).
+
+- `links.businessPortal`: the "For businesses" link (https://business.simblypet.com).
+- `appStatus`: `"coming-soon"` shows "Coming soon" store badges. Set it to `"live"` and fill in `links.appStore` / `links.googlePlay` to show real download links.
+
+The app screens on the page are drawn in HTML in `src/components/Screen.astro`, not screenshots, so they stay crisp and are easy to update.
+
+## Structure
+
+- `src/pages/index.astro`: the page, assembled from section components.
+- `src/components/`: one component per section (Hero, Features, HowItWorks, Services, Business, Faq, Download, Footer).
+- `src/scripts/motion.ts`: scroll animations (reveals, word highlight, pinned steps, horizontal services, expanding business panel). With JavaScript off, or with reduced motion requested, everything shows statically.
+- `src/styles/global.css`: design tokens (brand yellow `#FFBB03`, ink `#0a0a0a`), buttons and the reveal styles.
+- `public/`: favicon, share image (`og.png`) and `CNAME`.
+
+## Deploying
+
+Run `npm run build` and copy `dist/` into the backend repo's `deploy/proxy/static-sites/<name>/`, then point `deploy/proxy/sites/simblypet.caddy` at it (see DEPLOY.md section 11 in `simbly-pet-backend`).

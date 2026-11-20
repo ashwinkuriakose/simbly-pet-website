@@ -1,0 +1,233 @@
+---
+import Phone from './Phone.astro';
+import Screen from './Screen.astro';
+import site from '../content/site.json';
+
+const { how } = site;
+// One screen per step, in order.
+const screens = ['pet', 'health', 'reminder', 'booking', 'report'] as const;
+---
+<section class="how section" id="how" data-how>
+  <div class="container">
+    <header class="how__head">
+      <p class="eyebrow" data-reveal>{how.eyebrow}</p>
+      <h2 class="h2" data-reveal style="--d:1">{how.title}</h2>
+    </header>
+
+    <div class="how__grid">
+      <div class="how__stage" aria-hidden="true">
+        <div class="how__sticky">
+          <span class="how__ring"></span>
+          <Phone label="">
+            {screens.map((s, i) => (
+              <div class:list={['how__screen', { 'is-active': i === 0 }]} data-screen={i}>
+                <Screen screen={s} />
+              </div>
+            ))}
+          </Phone>
+        </div>
+      </div>
+
+      <ol class="how__steps">
+        <span class="how__rail" aria-hidden="true"><span class="how__fill"></span></span>
+        {how.steps.map((step, i) => (
+          <li class:list={['how__step', { 'is-active': i === 0 }]} data-step={i}>
+            <span class="how__num">{String(i + 1).padStart(2, '0')}</span>
+            <div class="how__text">
+              <h3>{step.title}</h3>
+              <p>{step.body}</p>
+            </div>
+            <div class="how__mobile-phone" aria-hidden="true">
+              <Phone label=""><Screen screen={screens[i]} /></Phone>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </div>
+</section>
+
+<style>
+  .how {
+    background: var(--cream);
+    border-radius: var(--radius-xl);
+    margin-inline: clamp(8px, 1.5vw, 20px);
+  }
+  .how__head {
+    display: grid;
+    gap: 16px;
+    max-width: 760px;
+    margin-bottom: clamp(32px, 6vw, 64px);
+  }
+  .how__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(32px, 6vw, 96px);
+  }
+  .how__stage {
+    position: relative;
+  }
+  .how__sticky {
+    position: sticky;
+    top: calc(50vh - 290px);
+    display: grid;
+    place-items: center;
+    height: 580px;
+  }
+  .how__ring {
+    position: absolute;
+    width: 480px;
+    height: 480px;
+    border-radius: 50%;
+    background: var(--yellow);
+    transform: scale(calc(0.85 + var(--p, 0) * 0.15));
+    transition: transform 0.2s linear;
+  }
+  .how__sticky :global(.phone) {
+    --z: 0.92;
+  }
+  .how__screen {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transform: translateY(24px) scale(0.98);
+    transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+  }
+  .how__screen.is-active {
+    opacity: 1;
+    transform: none;
+  }
+
+  .how__steps {
+    position: relative;
+    list-style: none;
+    margin: 0;
+    padding: 0 0 0 64px;
+  }
+  .how__rail {
+    position: absolute;
+    left: 21px;
+    top: 24px;
+    bottom: 24px;
+    width: 3px;
+    border-radius: 3px;
+    background: rgba(10, 10, 10, 0.1);
+  }
+  .how__fill {
+    position: absolute;
+    inset: 0;
+    background: var(--ink);
+    border-radius: inherit;
+    transform-origin: top;
+    transform: scaleY(var(--p, 0));
+  }
+  .how__step {
+    position: relative;
+    min-height: 62vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-block: 24px;
+  }
+  .how__step:first-child {
+    min-height: 48vh;
+    justify-content: flex-start;
+    padding-top: 120px;
+  }
+  .how__step:last-child {
+    min-height: 56vh;
+  }
+  .how__num {
+    position: absolute;
+    left: -64px;
+    top: 50%;
+    translate: 0 -50%;
+    display: grid;
+    place-items: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: var(--cream);
+    border: 3px solid rgba(10, 10, 10, 0.15);
+    font: 750 0.9375rem var(--font-display);
+    transition: background-color 0.4s, border-color 0.4s, color 0.4s, transform 0.4s var(--ease);
+  }
+  .how__step:first-child .how__num {
+    top: 120px;
+    translate: 0 0;
+  }
+  .how__step.is-active .how__num {
+    background: var(--yellow);
+    border-color: var(--ink);
+    transform: scale(1.1);
+  }
+  .how__text {
+    display: grid;
+    gap: 12px;
+    transition: opacity 0.5s var(--ease);
+  }
+  :global(.motion) .how__step:not(.is-active) .how__text {
+    opacity: 0.3;
+  }
+  .how__text h3 {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+  }
+  .how__text p {
+    color: var(--muted);
+    font-size: 1.125rem;
+    max-width: 42ch;
+  }
+  .how__mobile-phone {
+    display: none;
+  }
+
+  /* Phones and small tablets: no pinned phone; each step shows its own screen. */
+  @media (max-width: 860px) {
+    .how__grid {
+      grid-template-columns: 1fr;
+    }
+    .how__stage {
+      display: none;
+    }
+    .how__steps {
+      padding-left: 52px;
+    }
+    .how__rail {
+      left: 17px;
+    }
+    .how__num,
+    .how__step:first-child .how__num {
+      left: -52px;
+      top: 26px;
+      translate: 0 0;
+      width: 37px;
+      height: 37px;
+      font-size: 0.8125rem;
+    }
+    .how__step,
+    .how__step:first-child,
+    .how__step:last-child {
+      min-height: 0;
+      padding-block: 24px 40px;
+      justify-content: flex-start;
+    }
+    /* Show the top of each screen only, peeking out of a yellow card. */
+    .how__mobile-phone {
+      display: block;
+      margin-top: 24px;
+      height: 300px;
+      padding-top: 28px;
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      background: var(--yellow);
+    }
+    .how__mobile-phone :global(.phone) {
+      --z: 0.8;
+      margin-inline: auto;
+      box-shadow: 0 20px 40px -20px rgba(10, 10, 10, 0.5);
+    }
+    :global(.motion) .how__step:not(.is-active) .how__text {
+      opacity: 1;
+    }
+  }
+</style>

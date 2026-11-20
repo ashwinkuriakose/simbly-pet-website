@@ -1,0 +1,41 @@
+---
+// A phone frame. Put one or more <Screen> components inside; extra screens stack for crossfading.
+interface Props {
+  class?: string;
+  label?: string;
+}
+const { class: className, label = 'Simbly Pet app preview' } = Astro.props;
+---
+<div class:list={['phone', className]} role="img" aria-label={label}>
+  <div class="phone__screen">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .phone {
+    /* Size a phone with --z (1 = 300px wide); the screen contents scale with it. */
+    --z: 1;
+    --w: calc(300px * var(--z));
+    width: var(--w);
+    aspect-ratio: 9 / 19.2;
+    padding: calc(var(--w) * 0.033);
+    border-radius: calc(var(--w) * 0.16);
+    background: var(--ink);
+    box-shadow:
+      inset 0 0 0 2px #333,
+      var(--shadow-lg);
+    position: relative;
+  }
+  .phone__screen {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: calc(var(--w) * 0.13);
+    overflow: hidden;
+    background: var(--cream);
+  }
+  .phone__screen > :global(*) {
+    zoom: var(--z);
+  }
+</style>

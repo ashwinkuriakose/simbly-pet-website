@@ -1,0 +1,22 @@
+---
+import Icon from './Icon.astro';
+import site from '../content/site.json';
+
+const { services } = site;
+---
+<p class="eyebrow">{services.eyebrow}</p>
+<h2 class="h2">{services.title}</h2>
+<p class="lede">{services.subtitle}</p>
+<p class="verified"><Icon name="shield-check" size={20} /> Verified by Simbly Pet</p>
+
+<style>
+  .verified {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+  }
+  .verified :global(svg) {
+    color: var(--green);
+  }
+</style>

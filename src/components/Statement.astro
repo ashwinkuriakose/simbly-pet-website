@@ -1,0 +1,33 @@
+---
+import site from '../content/site.json';
+
+// Each word lights up as the paragraph scrolls through the viewport (see scripts/motion.ts).
+const words = site.statement.split(' ');
+---
+<section class="statement section" aria-label="About Simbly Pet">
+  <div class="container">
+    <p class="statement__text" data-words>
+      {words.map((w) => <span class="w">{w} </span>)}
+    </p>
+  </div>
+</section>
+
+<style>
+  .statement {
+    padding-block: clamp(110px, 16vw, 220px) clamp(60px, 10vw, 140px);
+  }
+  .statement__text {
+    font: 750 clamp(2rem, 5.4vw, 4.75rem) / 1.05 var(--font-display);
+    letter-spacing: -0.035em;
+    max-width: 18ch;
+  }
+  .w {
+    transition: color 0.25s;
+  }
+  :global(.motion) .w {
+    color: rgba(10, 10, 10, 0.14);
+  }
+  :global(.motion) .w.on {
+    color: var(--ink);
+  }
+</style>

@@ -1,0 +1,204 @@
+---
+import Icon from './Icon.astro';
+import ServicesIntro from './ServicesIntro.astro';
+import site from '../content/site.json';
+
+const { services } = site;
+---
+<!-- On wide screens this section pins and the cards slide sideways as you scroll (scripts/motion.ts).
+     On phones the intro sits above a swipeable row of cards. Only one copy of the intro is displayed at a time. -->
+<section class="services" id="services" data-hscroll>
+  <div class="container intro intro--narrow">
+    <ServicesIntro />
+  </div>
+  <div class="pin">
+    <div class="track" data-hscroll-track>
+      <div class="intro intro--wide">
+        <ServicesIntro />
+      </div>
+      {services.items.map((s, i) => (
+        <article class:list={['svc', { 'svc--soon': s.tag !== 'Available' }]}>
+          <div class="svc__top">
+            <span class="svc__icon"><Icon name={s.icon} size={32} strokeWidth={1.75} /></span>
+            <span class="svc__tag">{s.tag}</span>
+          </div>
+          <div>
+            <h3>{s.title}</h3>
+            <p>{s.body}</p>
+          </div>
+          <span class="svc__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+        </article>
+      ))}
+    </div>
+    <div class="progress" aria-hidden="true"><span></span></div>
+  </div>
+</section>
+
+<style>
+  .services {
+    position: relative;
+    padding-block: clamp(80px, 10vw, 120px);
+  }
+  .pin {
+    overflow: hidden;
+  }
+  .track {
+    display: flex;
+    gap: 20px;
+    padding-inline: max(var(--gutter), calc((100vw - var(--max)) / 2));
+  }
+  .intro {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .intro--wide {
+    flex: 0 0 min(440px, 84vw);
+    justify-content: center;
+    padding-right: 32px;
+  }
+  .intro--narrow {
+    display: none;
+    margin-bottom: 32px;
+  }
+  .svc {
+    position: relative;
+    flex: 0 0 clamp(280px, 30vw, 380px);
+    min-height: 460px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 28px;
+    border-radius: var(--radius-lg);
+    background: var(--ink);
+    color: var(--paper);
+    overflow: hidden;
+    transition: transform 0.5s var(--ease);
+  }
+  .svc:nth-of-type(odd) {
+    background: var(--yellow);
+    color: var(--ink);
+  }
+  .svc:hover {
+    transform: translateY(-8px) rotate(-1deg);
+  }
+  .svc.svc--soon {
+    background: var(--cream);
+    color: var(--ink);
+    border: 2px dashed rgba(10, 10, 10, 0.2);
+  }
+  .svc__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .svc__icon {
+    display: grid;
+    place-items: center;
+    width: 72px;
+    height: 72px;
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.14);
+  }
+  .svc:nth-of-type(odd) .svc__icon {
+    background: rgba(255, 255, 255, 0.7);
+  }
+  .svc.svc--soon .svc__icon {
+    background: var(--yellow-tint);
+  }
+  .svc__tag {
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    background: rgba(255, 255, 255, 0.16);
+  }
+  .svc:nth-of-type(odd) .svc__tag {
+    background: rgba(10, 10, 10, 0.1);
+  }
+  .svc.svc--soon .svc__tag {
+    background: var(--ink);
+    color: var(--yellow);
+  }
+  .svc h3 {
+    font-size: clamp(2rem, 3.4vw, 2.75rem);
+    margin-bottom: 10px;
+  }
+  .svc p {
+    opacity: 0.82;
+    max-width: 30ch;
+  }
+  .svc__num {
+    position: absolute;
+    right: 20px;
+    bottom: -0.18em;
+    font: 800 9rem/1 var(--font-display);
+    letter-spacing: -0.06em;
+    opacity: 0.08;
+    pointer-events: none;
+  }
+  .progress {
+    display: none;
+  }
+
+  /* Pinned horizontal scroll, switched on by JS (.is-pinned) on wide screens. */
+  .services.is-pinned {
+    padding-block: 0;
+  }
+  .services.is-pinned .pin {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .services.is-pinned .track {
+    will-change: transform;
+  }
+  .services.is-pinned .progress {
+    display: block;
+    width: min(320px, 40vw);
+    height: 4px;
+    margin: 40px auto 0;
+    border-radius: 4px;
+    background: rgba(10, 10, 10, 0.1);
+    overflow: hidden;
+  }
+  .progress span {
+    display: block;
+    height: 100%;
+    background: var(--ink);
+    transform-origin: left;
+    transform: scaleX(var(--p, 0));
+  }
+
+  /* Swipe row when not pinned */
+  .services:not(.is-pinned) .track {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--gutter);
+    scrollbar-width: none;
+    padding-bottom: 12px;
+  }
+  .services:not(.is-pinned) .track::-webkit-scrollbar {
+    display: none;
+  }
+  .services:not(.is-pinned) .svc {
+    scroll-snap-align: start;
+  }
+
+  @media (max-width: 860px) {
+    .intro--narrow {
+      display: flex;
+    }
+    .intro--wide {
+      display: none;
+    }
+    .svc {
+      flex-basis: 80vw;
+      min-height: 360px;
+    }
+  }
+</style>

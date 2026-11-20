@@ -1,0 +1,70 @@
+---
+// Icons used on the site. Add a line here to use another Lucide icon by name.
+import SyringeIcon from '@lucide/astro/icons/syringe';
+import BellRingIcon from '@lucide/astro/icons/bell-ring';
+import UsersIcon from '@lucide/astro/icons/users';
+import PawPrintIcon from '@lucide/astro/icons/paw-print';
+import CalendarCheckIcon from '@lucide/astro/icons/calendar-check';
+import CalendarDaysIcon from '@lucide/astro/icons/calendar-days';
+import CameraIcon from '@lucide/astro/icons/camera';
+import ScissorsIcon from '@lucide/astro/icons/scissors';
+import HouseIcon from '@lucide/astro/icons/house';
+import SunIcon from '@lucide/astro/icons/sun';
+import StethoscopeIcon from '@lucide/astro/icons/stethoscope';
+import CheckIcon from '@lucide/astro/icons/check';
+import ArrowRightIcon from '@lucide/astro/icons/arrow-right';
+import ArrowUpRightIcon from '@lucide/astro/icons/arrow-up-right';
+import ClipboardListIcon from '@lucide/astro/icons/clipboard-list';
+import MenuIcon from '@lucide/astro/icons/menu';
+import XIcon from '@lucide/astro/icons/x';
+import HeartIcon from '@lucide/astro/icons/heart';
+import SparklesIcon from '@lucide/astro/icons/sparkles';
+import UserPlusIcon from '@lucide/astro/icons/user-plus';
+import ShieldCheckIcon from '@lucide/astro/icons/shield-check';
+import ClockIcon from '@lucide/astro/icons/clock';
+import WeightIcon from '@lucide/astro/icons/weight';
+import PillIcon from '@lucide/astro/icons/pill';
+import PlusIcon from '@lucide/astro/icons/plus';
+import StoreIcon from '@lucide/astro/icons/store';
+import AppleIcon from '@lucide/astro/icons/apple';
+import PlayIcon from '@lucide/astro/icons/play';
+import BellIcon from '@lucide/astro/icons/bell';
+
+const icons = {
+  'syringe': SyringeIcon,
+  'bell-ring': BellRingIcon,
+  'users': UsersIcon,
+  'paw-print': PawPrintIcon,
+  'calendar-check': CalendarCheckIcon,
+  'calendar-days': CalendarDaysIcon,
+  'camera': CameraIcon,
+  'scissors': ScissorsIcon,
+  'house': HouseIcon,
+  'sun': SunIcon,
+  'stethoscope': StethoscopeIcon,
+  'check': CheckIcon,
+  'arrow-right': ArrowRightIcon,
+  'arrow-up-right': ArrowUpRightIcon,
+  'clipboard-list': ClipboardListIcon,
+  'menu': MenuIcon,
+  'x': XIcon,
+  'heart': HeartIcon,
+  'sparkles': SparklesIcon,
+  'user-plus': UserPlusIcon,
+  'shield-check': ShieldCheckIcon,
+  'clock': ClockIcon,
+  'weight': WeightIcon,
+  'pill': PillIcon,
+  'plus': PlusIcon,
+  'store': StoreIcon,
+  'apple': AppleIcon,
+  'play': PlayIcon,
+  'bell': BellIcon,
+} as const;
+
+interface Props { name: string; size?: number; strokeWidth?: number; class?: string }
+const { name, size = 22, strokeWidth = 2, class: className } = Astro.props;
+const Cmp = icons[name as keyof typeof icons];
+if (!Cmp) throw new Error(`Unknown icon: ${name}`);
+---
+<Cmp size={size} stroke-width={strokeWidth} class={className} aria-hidden="true" />

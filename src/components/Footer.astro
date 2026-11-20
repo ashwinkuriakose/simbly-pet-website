@@ -1,0 +1,125 @@
+---
+import { Image } from 'astro:assets';
+import Icon from './Icon.astro';
+import logo from '../assets/logo-mark.png';
+import site from '../content/site.json';
+
+const year = new Date().getFullYear();
+---
+<footer class="foot">
+  <div class="container">
+    <div class="foot__top">
+      <div class="foot__brand">
+        <a href="#top" class="foot__logo" aria-label="Simbly Pet home">
+          <Image src={logo} alt="" width={48} height={48} />
+          <span>Simbly<span>Pet</span></span>
+        </a>
+        <p>{site.footer.tagline}</p>
+      </div>
+      <nav class="foot__col" aria-label="Footer">
+        <b>Explore</b>
+        {site.nav.map((n) => <a href={n.href}>{n.label}</a>)}
+      </nav>
+      <div class="foot__col">
+        <b>Businesses</b>
+        <a href={site.links.businessPortal}>Register your business</a>
+        <a href={site.links.businessPortal}>Business sign in</a>
+      </div>
+    </div>
+    <p class="foot__huge" aria-hidden="true">Simbly Pet</p>
+    <div class="foot__bottom">
+      <span>© {year} {site.footer.copyright}. All rights reserved.</span>
+      <a href="#top" class="foot__up">Back to top <Icon name="arrow-up-right" size={16} /></a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .foot {
+    background: var(--ink);
+    color: var(--paper);
+    padding-top: clamp(64px, 8vw, 100px);
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    overflow: hidden;
+  }
+  .foot__top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 40px;
+  }
+  .foot__brand {
+    display: grid;
+    gap: 14px;
+    align-content: start;
+  }
+  .foot__logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    font: 800 1.5rem var(--font-display);
+    letter-spacing: -0.03em;
+  }
+  .foot__logo span span {
+    font-weight: 500;
+  }
+  .foot__logo img {
+    border-radius: 14px;
+  }
+  .foot__brand p {
+    color: var(--muted-on-dark);
+  }
+  .foot__col {
+    display: grid;
+    gap: 10px;
+    align-content: start;
+  }
+  .foot__col b {
+    color: var(--yellow);
+    font-size: 0.8125rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .foot__col a {
+    color: var(--muted-on-dark);
+    text-decoration: none;
+    width: fit-content;
+    transition: color 0.2s;
+  }
+  .foot__col a:hover {
+    color: var(--paper);
+  }
+  .foot__huge {
+    font: 800 clamp(4rem, 17vw, 15rem) / 0.8 var(--font-display);
+    letter-spacing: -0.06em;
+    color: var(--yellow);
+    margin: clamp(48px, 8vw, 96px) 0 0;
+    white-space: nowrap;
+    text-align: center;
+  }
+  .foot__bottom {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-block: 28px;
+    border-top: 1px solid var(--line-dark);
+    color: var(--muted-on-dark);
+    font-size: 0.875rem;
+  }
+  .foot__up {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+  }
+  @media (max-width: 720px) {
+    .foot__top {
+      grid-template-columns: 1fr 1fr;
+    }
+    .foot__brand {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

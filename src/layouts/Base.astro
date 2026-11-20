@@ -1,0 +1,46 @@
+---
+import '@fontsource-variable/bricolage-grotesque';
+import '@fontsource-variable/figtree';
+import '../styles/global.css';
+import site from '../content/site.json';
+
+const { title = site.meta.title, description = site.meta.description } = Astro.props as {
+  title?: string;
+  description?: string;
+};
+const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+const ogImage = new URL('/og.png', Astro.site).toString();
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#FFBB03" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Simbly Pet" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- Hide reveal targets only when motion is allowed and JS runs, so content is never stuck invisible. -->
+    <script is:inline>
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+        document.documentElement.classList.add('motion');
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <slot />
+    <script>
+      import '../scripts/motion.ts';
+    </script>
+  </body>
+</html>

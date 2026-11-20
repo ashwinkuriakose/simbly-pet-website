@@ -1,0 +1,58 @@
+---
+import Icon from './Icon.astro';
+import site from '../content/site.json';
+
+const items = site.highlights;
+---
+<div class="marquee" aria-label={items.join(', ')}>
+  <div class="marquee__track" aria-hidden="true">
+    {[0, 1].map(() => (
+      <div class="marquee__group">
+        {items.map((s) => (
+          <span class="marquee__item">{s}<Icon name="paw-print" size={22} /></span>
+        ))}
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .marquee {
+    background: var(--ink);
+    color: var(--yellow);
+    transform: rotate(-2deg);
+    margin: clamp(-28px, -3vw, -16px) -2vw 0;
+    padding-block: 18px;
+    overflow: hidden;
+    position: relative;
+    z-index: 2;
+  }
+  .marquee__track {
+    display: flex;
+    width: max-content;
+    animation: marquee 38s linear infinite;
+  }
+  .marquee:hover .marquee__track {
+    animation-play-state: paused;
+  }
+  .marquee__group {
+    display: flex;
+  }
+  .marquee__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 28px;
+    padding-right: 28px;
+    font: 750 clamp(1.5rem, 3.4vw, 2.5rem) / 1 var(--font-display);
+    letter-spacing: -0.03em;
+    white-space: nowrap;
+  }
+  .marquee__item :global(svg) {
+    opacity: 0.8;
+  }
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+</style>

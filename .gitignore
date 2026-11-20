@@ -12,3 +12,7 @@ npm-debug.log*
 .idea/
 *.swp
 *.swo
+
+# Astro
+dist/
+.astro/

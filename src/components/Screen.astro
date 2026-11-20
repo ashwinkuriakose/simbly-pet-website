@@ -1,0 +1,493 @@
+---
+// Illustrative app screens drawn in HTML so they stay crisp and are easy to update.
+import { Image } from 'astro:assets';
+import Icon from './Icon.astro';
+import dog from '../assets/pet-profile.jpg';
+import cat from '../assets/cat-profile.jpg';
+import corgi from '../assets/corgi.jpg';
+
+interface Props {
+  screen: 'home' | 'pet' | 'health' | 'reminder' | 'booking' | 'report';
+}
+const { screen } = Astro.props;
+---
+<div class={`scr scr--${screen}`}>
+  <div class="scr__status"><span>9:41</span><span class="scr__notch"></span><span class="scr__bars"></span></div>
+
+  {screen === 'home' && (
+    <div class="scr__body">
+      <p class="scr__hi">Good morning</p>
+      <p class="scr__title">Your pets</p>
+      <div class="scr__pets">
+        <figure><Image src={dog} alt="" width={96} height={96} /><figcaption>Biscuit</figcaption></figure>
+        <figure><Image src={cat} alt="" width={96} height={96} /><figcaption>Mochi</figcaption></figure>
+        <figure><Image src={corgi} alt="" width={96} height={96} /><figcaption>Pepper</figcaption></figure>
+        <figure class="scr__add"><span><Icon name="plus" size={18} /></span><figcaption>Add</figcaption></figure>
+      </div>
+      <div class="scr__card scr__card--yellow">
+        <span class="scr__ico"><Icon name="syringe" size={16} /></span>
+        <div><b>Rabies booster</b><small>Biscuit · due in 12 days</small></div>
+      </div>
+      <div class="scr__card">
+        <span class="scr__ico scr__ico--dark"><Icon name="scissors" size={16} /></span>
+        <div><b>Full groom</b><small>Sat 10:00 · Confirmed</small></div>
+        <span class="scr__pill scr__pill--green">Booked</span>
+      </div>
+      <div class="scr__tiles">
+        <span><Icon name="heart" size={16} />Health</span>
+        <span><Icon name="bell" size={16} />Reminders</span>
+        <span><Icon name="calendar-check" size={16} />Bookings</span>
+      </div>
+    </div>
+  )}
+
+  {screen === 'pet' && (
+    <div class="scr__body scr__body--center">
+      <Image src={dog} alt="" width={200} height={200} class="scr__hero-img" />
+      <p class="scr__name">Biscuit</p>
+      <p class="scr__sub">Golden Retriever · 3 years</p>
+      <div class="scr__chips">
+        <span>Dog</span><span>Microchipped</span><span>Neutered</span>
+      </div>
+      <div class="scr__stats">
+        <div><small>Weight</small><b>28.4 kg</b></div>
+        <div><small>Birthday</small><b>12 Mar</b></div>
+      </div>
+      <div class="scr__card">
+        <span class="scr__ico"><Icon name="users" size={16} /></span>
+        <div><b>Shared with 2</b><small>Co-owner · Family</small></div>
+      </div>
+    </div>
+  )}
+
+  {screen === 'health' && (
+    <div class="scr__body">
+      <p class="scr__title">Health</p>
+      <div class="scr__seg"><span class="on">Vaccines</span><span>Deworming</span><span>Weight</span></div>
+      <ul class="scr__list">
+        <li><span class="scr__ico"><Icon name="syringe" size={15} /></span><div><b>Rabies</b><small>Given 14 Mar · next 14 Mar 2027</small></div><Icon name="check" size={16} class="ok" /></li>
+        <li><span class="scr__ico"><Icon name="syringe" size={15} /></span><div><b>DHPP</b><small>Given 2 Feb · next 2 Feb 2027</small></div><Icon name="check" size={16} class="ok" /></li>
+        <li><span class="scr__ico scr__ico--dark"><Icon name="pill" size={15} /></span><div><b>Deworming</b><small>Every 3 months</small></div><Icon name="check" size={16} class="ok" /></li>
+      </ul>
+      <div class="scr__chart">
+        <small>Weight · kg</small>
+        <svg viewBox="0 0 200 60" preserveAspectRatio="none" aria-hidden="true">
+          <polyline points="0,48 30,44 60,40 90,34 120,30 150,26 180,22 200,20" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </div>
+    </div>
+  )}
+
+  {screen === 'reminder' && (
+    <div class="scr__body">
+      <div class="scr__notif">
+        <span class="scr__logo"></span>
+        <div><b>Simbly Pet</b><small>Biscuit's rabies booster is due in 12 days.</small></div>
+      </div>
+      <p class="scr__title">Upcoming</p>
+      <ul class="scr__list">
+        <li><span class="scr__date"><b>14</b>Mar</span><div><b>Rabies booster</b><small>Biscuit · from vaccination</small></div></li>
+        <li><span class="scr__date"><b>02</b>Apr</span><div><b>Deworming</b><small>Mochi · every 3 months</small></div></li>
+        <li><span class="scr__date"><b>18</b>Apr</span><div><b>Flea treatment</b><small>Pepper · monthly</small></div></li>
+      </ul>
+    </div>
+  )}
+
+  {screen === 'booking' && (
+    <div class="scr__body">
+      <p class="scr__hi">Happy Tails Grooming</p>
+      <p class="scr__title">Full groom</p>
+      <div class="scr__days">
+        <span><small>Thu</small>12</span><span><small>Fri</small>13</span><span class="on"><small>Sat</small>14</span><span><small>Sun</small>15</span>
+      </div>
+      <div class="scr__times">
+        <span>09:00</span><span class="on">10:00</span><span>11:30</span><span>14:00</span>
+      </div>
+      <div class="scr__card">
+        <Image src={dog} alt="" width={64} height={64} class="scr__mini" />
+        <div><b>Biscuit</b><small>Bath, haircut, nails</small></div>
+      </div>
+      <span class="scr__cta">Request booking</span>
+    </div>
+  )}
+
+  {screen === 'report' && (
+    <div class="scr__body">
+      <p class="scr__hi">Grooming report</p>
+      <p class="scr__title">Pepper looks great!</p>
+      <div class="scr__ba">
+        <figure><Image src={corgi} alt="" width={180} height={180} class="before" /><figcaption>Before</figcaption></figure>
+        <figure><Image src={corgi} alt="" width={180} height={180} /><figcaption>After</figcaption></figure>
+      </div>
+      <ul class="scr__checks">
+        <li><Icon name="check" size={14} />Bath and blow-dry</li>
+        <li><Icon name="check" size={14} />Nails trimmed</li>
+        <li><Icon name="check" size={14} />Ears cleaned</li>
+      </ul>
+    </div>
+  )}
+</div>
+
+<style>
+  .scr {
+    position: absolute;
+    inset: 0;
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 12px;
+    line-height: 1.3;
+    overflow: hidden;
+  }
+  .scr__status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 22px 0;
+    font-weight: 700;
+    font-size: 11px;
+  }
+  .scr__notch {
+    width: 72px;
+    height: 20px;
+    border-radius: 999px;
+    background: var(--ink);
+  }
+  .scr__bars {
+    width: 22px;
+    height: 10px;
+    border-radius: 3px;
+    border: 1.5px solid var(--ink);
+  }
+  .scr__body {
+    padding: 18px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .scr__body--center {
+    align-items: center;
+    text-align: center;
+  }
+  .scr__hi {
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .scr__title {
+    font: 750 20px/1.1 var(--font-display);
+    letter-spacing: -0.02em;
+    margin-bottom: 2px;
+  }
+  .scr__pets {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+  }
+  .scr__pets figure {
+    margin: 0;
+    display: grid;
+    justify-items: center;
+    gap: 4px;
+    font-size: 10.5px;
+    font-weight: 600;
+  }
+  .scr__pets img,
+  .scr__add span {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--paper);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  }
+  .scr__add span {
+    display: grid;
+    place-items: center;
+    background: var(--paper);
+    border: 1.5px dashed rgba(10, 10, 10, 0.3);
+    box-shadow: none;
+  }
+  .scr__card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 14px;
+    background: var(--paper);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+    width: 100%;
+    text-align: left;
+  }
+  .scr__card--yellow {
+    background: var(--yellow);
+  }
+  .scr__card div,
+  .scr__list div,
+  .scr__notif div {
+    flex: 1;
+    display: grid;
+    gap: 1px;
+    min-width: 0;
+  }
+  .scr b {
+    font-weight: 700;
+  }
+  .scr small {
+    color: var(--muted);
+    font-size: 10.5px;
+  }
+  .scr__card--yellow small {
+    color: rgba(10, 10, 10, 0.7);
+  }
+  .scr__ico {
+    flex: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    background: var(--yellow-tint);
+  }
+  .scr__card--yellow .scr__ico {
+    background: rgba(255, 255, 255, 0.6);
+  }
+  .scr__ico--dark {
+    background: var(--ink);
+    color: var(--yellow);
+  }
+  .scr__pill {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 999px;
+  }
+  .scr__pill--green {
+    background: #dcf5e6;
+    color: var(--green);
+  }
+  .scr__tiles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+  .scr__tiles span {
+    display: grid;
+    justify-items: center;
+    gap: 4px;
+    padding: 10px 4px;
+    background: var(--paper);
+    border-radius: 12px;
+    font-size: 10.5px;
+    font-weight: 600;
+  }
+  .scr__hero-img {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--yellow);
+    margin-top: 6px;
+  }
+  .scr__name {
+    font: 750 22px/1 var(--font-display);
+    letter-spacing: -0.02em;
+  }
+  .scr__sub {
+    color: var(--muted);
+    margin-top: -4px;
+  }
+  .scr__chips {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+  }
+  .scr__chips span,
+  .scr__seg span,
+  .scr__times span {
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: var(--paper);
+    font-size: 10.5px;
+    font-weight: 600;
+    border: 1px solid var(--line);
+  }
+  .scr__stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    width: 100%;
+  }
+  .scr__stats div {
+    display: grid;
+    gap: 2px;
+    padding: 10px;
+    border-radius: 14px;
+    background: var(--paper);
+  }
+  .scr__stats b {
+    font: 750 16px/1 var(--font-display);
+  }
+  .scr__seg {
+    display: flex;
+    gap: 5px;
+  }
+  .scr__seg .on,
+  .scr__times .on {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+  .scr__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 6px;
+  }
+  .scr__list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px;
+    border-radius: 14px;
+    background: var(--paper);
+  }
+  .scr__list :global(.ok) {
+    color: var(--green);
+    flex: none;
+  }
+  .scr__chart {
+    padding: 10px;
+    border-radius: 14px;
+    background: var(--ink);
+    color: var(--yellow);
+  }
+  .scr__chart small {
+    color: var(--muted-on-dark);
+  }
+  .scr__chart svg {
+    width: 100%;
+    height: 56px;
+    margin-top: 6px;
+  }
+  .scr__notif {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 10px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.25);
+    margin-bottom: 6px;
+  }
+  .scr__logo {
+    flex: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    background: var(--yellow) url('/favicon.png') center / cover;
+  }
+  .scr__date {
+    flex: none;
+    width: 38px;
+    display: grid;
+    justify-items: center;
+    padding: 4px 0;
+    border-radius: 10px;
+    background: var(--yellow);
+    font-size: 9.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .scr__date b {
+    font: 750 15px/1 var(--font-display);
+  }
+  .scr__days {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+  }
+  .scr__days span {
+    display: grid;
+    justify-items: center;
+    padding: 8px 0;
+    border-radius: 14px;
+    background: var(--paper);
+    font: 750 16px/1.1 var(--font-display);
+  }
+  .scr__days span small {
+    font: 600 10px var(--font-body);
+  }
+  .scr__days .on {
+    background: var(--yellow);
+  }
+  .scr__days .on small {
+    color: var(--ink);
+  }
+  .scr__times {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  .scr__mini {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .scr__cta {
+    margin-top: 4px;
+    text-align: center;
+    padding: 12px;
+    border-radius: 999px;
+    background: var(--ink);
+    color: var(--paper);
+    font-weight: 700;
+  }
+  .scr__ba {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+  .scr__ba figure {
+    margin: 0;
+    position: relative;
+  }
+  .scr__ba img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 14px;
+  }
+  .scr__ba .before {
+    filter: saturate(0.35) brightness(0.92) blur(0.4px);
+  }
+  .scr__ba figcaption {
+    position: absolute;
+    left: 6px;
+    bottom: 6px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: var(--paper);
+    font-size: 10px;
+    font-weight: 700;
+  }
+  .scr__checks {
+    list-style: none;
+    margin: 0;
+    padding: 10px;
+    border-radius: 14px;
+    background: var(--paper);
+    display: grid;
+    gap: 6px;
+  }
+  .scr__checks li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+  }
+  .scr__checks :global(svg) {
+    color: var(--green);
+  }
+</style>

@@ -1,0 +1,327 @@
+---
+import Icon from './Icon.astro';
+import site from '../content/site.json';
+
+const { business } = site;
+const portal = site.links.businessPortal;
+const day = [
+  { t: '09:00', pet: 'Biscuit', svc: 'Full groom', who: 'Asha', state: 'Checked in' },
+  { t: '10:30', pet: 'Mochi', svc: 'Boarding · 3 nights', who: 'Ravi', state: 'Confirmed' },
+  { t: '12:00', pet: 'Pepper', svc: 'Nail trim', who: 'Asha', state: 'Request' },
+  { t: '14:00', pet: 'Coco', svc: 'Daycare', who: 'Meera', state: 'Confirmed' },
+];
+---
+<section class="biz" id="business" data-expand>
+  <div class="biz__panel">
+    <div class="container biz__grid">
+      <div class="biz__copy">
+        <p class="eyebrow biz__eyebrow" data-reveal>{business.eyebrow}</p>
+        <h2 class="h2" data-reveal style="--d:1">{business.title}</h2>
+        <p class="biz__sub" data-reveal style="--d:2">{business.subtitle}</p>
+        <ul class="biz__points">
+          {business.points.map((p, i) => (
+            <li data-reveal style={`--d:${i + 2}`}>
+              <span class="biz__icon"><Icon name={p.icon} size={20} /></span>
+              <div><b>{p.title}</b><span>{p.body}</span></div>
+            </li>
+          ))}
+        </ul>
+        <div class="biz__ctas" data-reveal style="--d:4">
+          <a class="btn btn--yellow" href={portal}>{business.cta} <Icon name="arrow-up-right" size={18} /></a>
+          <a class="btn btn--ghost-light" href={portal}>{business.secondary}</a>
+        </div>
+      </div>
+
+      <div class="biz__visual" data-reveal="right" style="--d:2" aria-hidden="true">
+        <div class="dash">
+          <div class="dash__top">
+            <span class="dash__dots"><i></i><i></i><i></i></span>
+            <span class="dash__url">business.simblypet.com</span>
+          </div>
+          <div class="dash__body">
+            <div class="dash__head">
+              <div><small>Today</small><b>Bookings</b></div>
+              <span class="dash__pill"><Icon name="calendar-days" size={14} /> 4 today</span>
+            </div>
+            <ul class="dash__list">
+              {day.map((r) => (
+                <li>
+                  <span class="dash__time">{r.t}</span>
+                  <div><b>{r.pet}</b><small>{r.svc} · {r.who}</small></div>
+                  <span class:list={['dash__state', `s-${r.state.split(' ')[0].toLowerCase()}`]}>{r.state}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <div class="biz__float">
+          <Icon name="camera" size={18} />
+          <span><b>Report sent</b><small>Biscuit's parent was notified</small></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .biz {
+    padding-block: clamp(40px, 6vw, 80px);
+  }
+  /* The panel grows from an inset card to full width as it scrolls in (--p from motion.ts). */
+  .biz__panel {
+    --p: 1;
+    background: var(--ink);
+    color: var(--paper);
+    padding-block: clamp(80px, 10vw, 140px);
+    clip-path: inset(0 calc((1 - var(--p)) * 6%) round calc(var(--radius-xl) * (1.6 - var(--p))));
+    overflow: hidden;
+    position: relative;
+  }
+  :global(.motion) .biz__panel {
+    --p: 0;
+  }
+  .biz__panel::before {
+    content: '';
+    position: absolute;
+    width: 720px;
+    height: 720px;
+    right: -260px;
+    top: -260px;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(255, 187, 3, 0.22), transparent);
+    pointer-events: none;
+  }
+  .biz__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(40px, 6vw, 80px);
+    align-items: center;
+    position: relative;
+  }
+  .biz__grid > * {
+    min-width: 0;
+  }
+  .biz__copy {
+    display: grid;
+    gap: 20px;
+  }
+  .biz__copy .h2 {
+    color: var(--yellow);
+  }
+  .biz__sub {
+    color: var(--muted-on-dark);
+    font-size: 1.125rem;
+    max-width: 48ch;
+  }
+  .biz__points {
+    list-style: none;
+    margin: 12px 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px 24px;
+  }
+  .biz__points li {
+    display: flex;
+    gap: 12px;
+  }
+  .biz__points div {
+    display: grid;
+    gap: 2px;
+  }
+  .biz__points b {
+    font-weight: 700;
+  }
+  .biz__points span:not(.biz__icon) {
+    color: var(--muted-on-dark);
+    font-size: 0.9375rem;
+    line-height: 1.45;
+  }
+  .biz__icon {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: rgba(255, 187, 3, 0.14);
+    color: var(--yellow);
+  }
+  .biz__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .biz__visual {
+    position: relative;
+  }
+  .dash {
+    border-radius: 22px;
+    background: var(--ink-2);
+    border: 1px solid var(--line-dark);
+    box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.8);
+    overflow: hidden;
+    transform: perspective(1400px) rotateY(-8deg) rotateX(4deg);
+    transition: transform 0.8s var(--ease);
+  }
+  .biz__visual:hover .dash {
+    transform: none;
+  }
+  .dash__top {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line-dark);
+  }
+  .dash__dots {
+    display: flex;
+    gap: 6px;
+  }
+  .dash__dots i {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--ink-3);
+  }
+  .dash__url {
+    flex: 1;
+    max-width: 260px;
+    padding: 5px 12px;
+    border-radius: 8px;
+    background: var(--ink-3);
+    color: var(--muted-on-dark);
+    font-size: 0.78rem;
+  }
+  .dash__body {
+    padding: 20px;
+    display: grid;
+    gap: 16px;
+  }
+  .dash__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .dash__head div {
+    display: grid;
+  }
+  .dash__head small {
+    color: var(--muted-on-dark);
+  }
+  .dash__head b {
+    font: 750 1.5rem var(--font-display);
+    letter-spacing: -0.02em;
+  }
+  .dash__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: var(--yellow);
+    color: var(--ink);
+    font-size: 0.8125rem;
+    font-weight: 700;
+  }
+  .dash__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 8px;
+  }
+  .dash__list li {
+    display: grid;
+    grid-template-columns: 56px 1fr auto;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 14px;
+    background: var(--ink-3);
+  }
+  .dash__list div {
+    display: grid;
+    min-width: 0;
+  }
+  .dash__list small {
+    color: var(--muted-on-dark);
+    font-size: 0.8125rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .dash__time {
+    font: 700 0.9375rem var(--font-display);
+    color: var(--yellow);
+  }
+  .dash__state {
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    background: rgba(255, 255, 255, 0.08);
+  }
+  .s-checked {
+    background: rgba(31, 157, 85, 0.2);
+    color: #6ee7a0;
+  }
+  .s-request {
+    background: rgba(255, 187, 3, 0.18);
+    color: var(--yellow);
+  }
+  .biz__float {
+    position: absolute;
+    left: -24px;
+    bottom: -28px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    border-radius: 16px;
+    background: var(--paper);
+    color: var(--ink);
+    box-shadow: var(--shadow-lg);
+    font-size: 0.875rem;
+    line-height: 1.25;
+    animation: bob 6s ease-in-out infinite;
+  }
+  .biz__float span {
+    display: grid;
+  }
+  .biz__float small {
+    color: var(--muted);
+  }
+  @keyframes bob {
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @media (max-width: 960px) {
+    .biz__grid {
+      grid-template-columns: 1fr;
+    }
+    .dash {
+      transform: none;
+    }
+    .biz__float {
+      left: 12px;
+    }
+  }
+  @media (max-width: 560px) {
+    .biz__points {
+      grid-template-columns: 1fr;
+    }
+    .biz__ctas .btn {
+      flex: 1 1 100%;
+    }
+    .dash__list li {
+      grid-template-columns: 46px 1fr auto;
+      padding: 10px;
+      gap: 8px;
+    }
+  }
+</style>
