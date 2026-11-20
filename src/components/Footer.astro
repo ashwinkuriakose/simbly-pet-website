@@ -10,7 +10,7 @@ const year = new Date().getFullYear();
   <div class="container">
     <div class="foot__top">
       <div class="foot__brand">
-        <a href="#top" class="foot__logo" aria-label="Simbly Pet home">
+        <a href="/" class="foot__logo" aria-label="Simbly Pet home">
           <Image src={logo} alt="" width={48} height={48} />
           <span>Simbly<span>Pet</span></span>
         </a>
@@ -22,6 +22,7 @@ const year = new Date().getFullYear();
       </nav>
       <div class="foot__col">
         <b>Businesses</b>
+        <a href="/business">Simbly Pet for businesses</a>
         <a href={site.links.businessPortal}>Register your business</a>
         <a href={site.links.businessPortal}>Business sign in</a>
       </div>
@@ -29,7 +30,7 @@ const year = new Date().getFullYear();
     <p class="foot__huge" aria-hidden="true">Simbly Pet</p>
     <div class="foot__bottom">
       <span>© {year} {site.footer.copyright}. All rights reserved.</span>
-      <a href="#top" class="foot__up">Back to top <Icon name="arrow-up-right" size={16} /></a>
+      <a href="#main" class="foot__up">Back to top <Icon name="arrow-up-right" size={16} /></a>
     </div>
   </div>
 </footer>

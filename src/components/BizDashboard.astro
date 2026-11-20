@@ -1,0 +1,298 @@
+---
+// Illustrative business dashboard (not a screenshot) for the /business hero.
+import Icon from './Icon.astro';
+
+const navItems = [
+  { icon: 'calendar-days', label: 'Bookings', on: true },
+  { icon: 'calendar-check', label: 'Calendar' },
+  { icon: 'heart', label: 'Customers' },
+  { icon: 'clipboard-list', label: 'Services' },
+  { icon: 'users', label: 'Staff' },
+  { icon: 'store', label: 'Branches' },
+];
+const rows = [
+  { t: '09:00', pet: 'Biscuit', svc: 'Full groom', who: 'Asha', state: 'Checked in', cls: 'in' },
+  { t: '10:30', pet: 'Mochi', svc: 'Boarding · 3 nights', who: 'Ravi', state: 'Confirmed', cls: 'ok' },
+  { t: '12:00', pet: 'Coco', svc: 'Daycare', who: 'Meera', state: 'Confirmed', cls: 'ok' },
+  { t: '15:30', pet: 'Bruno', svc: 'Bath & nail trim', who: 'Walk-in', state: 'Walk-in', cls: 'walk' },
+];
+---
+<div class="win" aria-hidden="true">
+  <div class="win__bar">
+    <span class="win__dots"><i></i><i></i><i></i></span>
+    <span class="win__url">business.simblypet.com</span>
+  </div>
+  <div class="win__body">
+    <aside class="side">
+      <span class="side__brand"><span class="side__logo"></span>Happy Tails</span>
+      {navItems.map((n) => (
+        <span class:list={['side__item', { on: n.on }]}><Icon name={n.icon} size={16} />{n.label}</span>
+      ))}
+    </aside>
+    <div class="main">
+      <div class="main__head">
+        <div><small>Today · Main branch</small><b>Bookings</b></div>
+        <span class="main__add"><Icon name="plus" size={14} /> New booking</span>
+      </div>
+      <div class="stats">
+        <div><small>Today</small><b>12</b></div>
+        <div><small>Requests</small><b class="y">3</b></div>
+        <div><small>Checked in</small><b>4</b></div>
+      </div>
+      <div class="req">
+        <span class="req__ico"><Icon name="bell-ring" size={16} /></span>
+        <div><b>New request · Pepper</b><small>Full groom · Sat 10:00</small></div>
+        <span class="req__btn req__btn--ghost">Suggest time</span>
+        <span class="req__btn">Confirm</span>
+      </div>
+      <ul class="rows">
+        {rows.map((r) => (
+          <li>
+            <span class="rows__t">{r.t}</span>
+            <div><b>{r.pet}</b><small>{r.svc}</small></div>
+            <span class="rows__who">{r.who}</span>
+            <span class={`rows__s s-${r.cls}`}>{r.state}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</div>
+
+<style>
+  .win {
+    border-radius: 22px;
+    background: var(--ink-2);
+    border: 1px solid var(--line-dark);
+    color: var(--paper);
+    overflow: hidden;
+    box-shadow: 0 50px 100px -40px rgba(0, 0, 0, 0.9);
+    font-size: 0.875rem;
+    text-align: left;
+  }
+  .win__bar {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line-dark);
+  }
+  .win__dots {
+    display: flex;
+    gap: 6px;
+  }
+  .win__dots i {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--ink-3);
+  }
+  .win__url {
+    flex: 1;
+    max-width: 280px;
+    margin-inline: auto;
+    padding: 5px 12px;
+    border-radius: 8px;
+    background: var(--ink-3);
+    color: var(--muted-on-dark);
+    font-size: 0.78rem;
+    text-align: center;
+  }
+  .win__body {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+  }
+  .side {
+    display: grid;
+    align-content: start;
+    gap: 2px;
+    padding: 16px 12px;
+    border-right: 1px solid var(--line-dark);
+  }
+  .side__brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 4px 8px 16px;
+    font-weight: 700;
+  }
+  .side__logo {
+    width: 26px;
+    height: 26px;
+    border-radius: 8px;
+    background: var(--yellow) url('/favicon.png') center / cover;
+  }
+  .side__item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 10px;
+    border-radius: 10px;
+    color: var(--muted-on-dark);
+  }
+  .side__item.on {
+    background: rgba(255, 187, 3, 0.14);
+    color: var(--yellow);
+    font-weight: 600;
+  }
+  .main {
+    display: grid;
+    gap: 14px;
+    padding: 20px;
+    min-width: 0;
+  }
+  .main__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .main__head div {
+    display: grid;
+  }
+  .main small {
+    color: var(--muted-on-dark);
+    font-size: 0.78rem;
+  }
+  .main__head b {
+    font: 750 1.5rem var(--font-display);
+    letter-spacing: -0.02em;
+  }
+  .main__add {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: var(--yellow);
+    color: var(--ink);
+    font-weight: 700;
+    font-size: 0.8125rem;
+  }
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  .stats div {
+    display: grid;
+    gap: 2px;
+    padding: 12px 14px;
+    border-radius: 14px;
+    background: var(--ink-3);
+  }
+  .stats b {
+    font: 750 1.5rem/1 var(--font-display);
+  }
+  .stats .y {
+    color: var(--yellow);
+  }
+  .req {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 14px;
+    background: rgba(255, 187, 3, 0.1);
+    border: 1px solid rgba(255, 187, 3, 0.35);
+  }
+  .req div {
+    flex: 1;
+    display: grid;
+    min-width: 0;
+  }
+  .req__ico {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    background: var(--yellow);
+    color: var(--ink);
+  }
+  .req__btn {
+    padding: 7px 12px;
+    border-radius: 999px;
+    background: var(--paper);
+    color: var(--ink);
+    font-weight: 700;
+    font-size: 0.78rem;
+    white-space: nowrap;
+  }
+  .req__btn--ghost {
+    background: transparent;
+    color: var(--paper);
+    border: 1px solid var(--line-dark);
+  }
+  .rows {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 8px;
+  }
+  .rows li {
+    display: grid;
+    grid-template-columns: 56px 1fr auto auto;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 14px;
+    border-radius: 14px;
+    background: var(--ink-3);
+  }
+  .rows div {
+    display: grid;
+    min-width: 0;
+  }
+  .rows small {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .rows__t {
+    font: 700 0.9375rem var(--font-display);
+    color: var(--yellow);
+  }
+  .rows__who {
+    color: var(--muted-on-dark);
+    font-size: 0.8125rem;
+  }
+  .rows__s {
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    background: rgba(255, 255, 255, 0.08);
+  }
+  .s-in {
+    background: rgba(31, 157, 85, 0.2);
+    color: #6ee7a0;
+  }
+  .s-walk {
+    background: rgba(255, 187, 3, 0.16);
+    color: var(--yellow);
+  }
+
+  @media (max-width: 760px) {
+    .win__body {
+      grid-template-columns: 1fr;
+    }
+    .side {
+      display: none;
+    }
+    .main {
+      padding: 14px;
+    }
+    .rows__who,
+    .req__btn--ghost {
+      display: none;
+    }
+    .rows li {
+      grid-template-columns: 46px 1fr auto;
+      padding: 10px;
+      gap: 8px;
+    }
+    .stats b {
+      font-size: 1.25rem;
+    }
+  }
+</style>

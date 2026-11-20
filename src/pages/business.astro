@@ -1,0 +1,560 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Faq from '../components/Faq.astro';
+import Icon from '../components/Icon.astro';
+import BizDashboard from '../components/BizDashboard.astro';
+import site from '../content/site.json';
+
+const page = site.businessPage;
+const portal = site.links.businessPortal;
+const [titleLead, ...titleRest] = page.hero.title.split(' ');
+const titleEnd = titleRest.pop();
+---
+<Base title={page.meta.title} description={page.meta.description}>
+  <Nav />
+  <main id="main">
+    <!-- Hero: dark, with the dashboard rising into view as you scroll (data-hero-stage → --p). -->
+    <section class="bh">
+      <div class="container bh__copy">
+        <p class="bh__badge"><Icon name="store" size={16} /> {page.hero.eyebrow}</p>
+        <h1 class="bh__title">
+          <span class="bh__line" style="--i:0"><span>{titleLead} {titleRest.join(' ')}</span></span>
+          <span class="bh__line" style="--i:1"><span class="bh__accent">{titleEnd}</span></span>
+        </h1>
+        <p class="bh__sub">{page.hero.subtitle}</p>
+        <div class="bh__ctas">
+          <a class="btn btn--yellow" href={portal}>{page.hero.cta} <Icon name="arrow-up-right" size={18} /></a>
+          <a class="btn btn--ghost-light" href={portal}>{page.hero.secondary}</a>
+        </div>
+      </div>
+
+      <div class="bh__stage" data-hero-stage>
+        <div class="bh__win">
+          <BizDashboard />
+          <div class="bh__chip bh__chip--1">
+            <span class="ico ico--green"><Icon name="check" size={18} /></span>
+            <span><b>Booking confirmed</b><small>Pepper's parent was notified</small></span>
+          </div>
+          <div class="bh__chip bh__chip--2">
+            <span class="ico"><Icon name="camera" size={18} /></span>
+            <span><b>Report sent</b><small>Before-and-after photos</small></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Who it's for -->
+    <section class="section aud">
+      <div class="container">
+        <header class="head">
+          <p class="eyebrow" data-reveal>{page.audiences.eyebrow}</p>
+          <h2 class="h2" data-reveal style="--d:1">{page.audiences.title}</h2>
+          <p class="lede" data-reveal style="--d:2">{page.audiences.subtitle}</p>
+        </header>
+        <div class="aud__grid">
+          {page.audiences.items.map((a, i) => (
+            <article class:list={['aud__card', { 'aud__card--soon': a.tag !== 'Available' }]} data-reveal style={`--d:${i}`}>
+              <div class="aud__top">
+                <span class="aud__icon"><Icon name={a.icon} size={28} strokeWidth={1.75} /></span>
+                <span class="aud__tag">{a.tag}</span>
+              </div>
+              <h3>{a.title}</h3>
+              <p>{a.body}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="section feat">
+      <div class="container">
+        <header class="head">
+          <p class="eyebrow" data-reveal>{page.features.eyebrow}</p>
+          <h2 class="h2" data-reveal style="--d:1">{page.features.title}</h2>
+        </header>
+        <div class="feat__grid">
+          {page.features.items.map((f, i) => (
+            <article class="feat__item" data-reveal style={`--d:${i % 4}`}>
+              <span class="feat__icon"><Icon name={f.icon} size={22} /></span>
+              <h3>{f.title}</h3>
+              <p>{f.body}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- How to join: the line fills as you scroll (data-progress → --p). -->
+    <section class="section steps">
+      <div class="container">
+        <header class="head">
+          <p class="eyebrow" data-reveal>{page.steps.eyebrow}</p>
+          <h2 class="h2" data-reveal style="--d:1">{page.steps.title}</h2>
+        </header>
+        <ol class="steps__list" data-progress>
+          <span class="steps__line" aria-hidden="true"><span></span></span>
+          {page.steps.items.map((s, i) => (
+            <li data-reveal style={`--d:${i}`}>
+              <span class="steps__num">{i + 1}</span>
+              <h3>{s.title}</h3>
+              <p>{s.body}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <Faq content={page.faq} />
+
+    <!-- Final call to action -->
+    <section class="bcta">
+      <div class="container">
+        <div class="bcta__card" data-reveal="scale">
+          <h2>{page.cta.title}</h2>
+          <p>{page.cta.subtitle}</p>
+          <div class="bcta__btns">
+            <a class="btn" href={portal}>{page.hero.cta} <Icon name="arrow-up-right" size={18} /></a>
+            <a class="btn btn--ghost" href={portal}>{page.hero.secondary}</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  /* ---------- Hero ---------- */
+  .bh {
+    position: relative;
+    padding-top: clamp(128px, 15vw, 176px);
+    background:
+      radial-gradient(50% 40% at 50% 0%, rgba(255, 187, 3, 0.25), transparent 70%),
+      var(--ink);
+    color: var(--paper);
+    overflow: hidden;
+    border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+  }
+  .bh__copy {
+    display: grid;
+    justify-items: center;
+    text-align: center;
+  }
+  .bh__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 999px;
+    background: rgba(255, 187, 3, 0.12);
+    border: 1px solid rgba(255, 187, 3, 0.4);
+    color: var(--yellow);
+    font-size: 0.875rem;
+    font-weight: 700;
+  }
+  .bh__title {
+    font-size: clamp(2.75rem, 7.6vw, 6.25rem);
+    line-height: 0.95;
+    letter-spacing: -0.045em;
+    font-weight: 800;
+    margin: 24px 0 22px;
+  }
+  .bh__line {
+    display: block;
+    overflow: hidden;
+    padding-bottom: 0.08em;
+  }
+  .bh__line > span {
+    display: inline-block;
+  }
+  .bh__accent {
+    color: var(--yellow);
+    font-style: italic;
+    padding-right: 0.08em;
+  }
+  .bh__sub {
+    font-size: clamp(1.0625rem, 1.5vw, 1.25rem);
+    color: var(--muted-on-dark);
+    max-width: 52ch;
+  }
+  .bh__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 30px;
+  }
+  .bh__stage {
+    --p: 1;
+    margin-top: clamp(48px, 7vw, 80px);
+    padding-inline: var(--gutter);
+    height: clamp(360px, 40vw, 520px);
+    overflow: hidden;
+  }
+  :global(.motion) .bh__stage {
+    --p: 0;
+  }
+  .bh__win {
+    position: relative;
+    max-width: 1040px;
+    margin-inline: auto;
+    transform: perspective(1600px) translateY(calc((1 - var(--p)) * 60px)) rotateX(calc((1 - var(--p)) * 14deg));
+    transform-origin: 50% 0;
+  }
+  .bh__chip {
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px 10px 10px;
+    border-radius: 18px;
+    background: var(--paper);
+    color: var(--ink);
+    box-shadow: var(--shadow-lg);
+    font-size: 0.875rem;
+    line-height: 1.25;
+    animation: bob 6s ease-in-out infinite;
+  }
+  .bh__chip span:last-child {
+    display: grid;
+  }
+  .bh__chip small {
+    color: var(--muted);
+    font-size: 0.78rem;
+  }
+  .bh__chip--1 {
+    left: -36px;
+    top: 34%;
+  }
+  .bh__chip--2 {
+    right: -30px;
+    top: 62%;
+    animation-delay: -3s;
+  }
+  .ico {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+    background: var(--yellow);
+  }
+  .ico--green {
+    background: #dcf5e6;
+    color: var(--green);
+  }
+  @keyframes bob {
+    50% {
+      translate: 0 -10px;
+    }
+  }
+  :global(.motion) .bh__line > span {
+    animation: rise 1.1s var(--ease) both;
+    animation-delay: calc(0.1s + var(--i) * 0.12s);
+  }
+  :global(.motion) .bh__badge,
+  :global(.motion) .bh__sub,
+  :global(.motion) .bh__ctas {
+    animation: fade-up 0.9s var(--ease) both;
+  }
+  :global(.motion) .bh__sub {
+    animation-delay: 0.35s;
+  }
+  :global(.motion) .bh__ctas {
+    animation-delay: 0.45s;
+  }
+  :global(.motion) .bh__stage {
+    animation: fade-up 1.2s var(--ease) 0.3s both;
+  }
+  @keyframes rise {
+    from {
+      transform: translateY(105%);
+    }
+  }
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+  }
+
+  /* ---------- Shared section head ---------- */
+  .head {
+    display: grid;
+    gap: 16px;
+    max-width: 760px;
+    margin-bottom: clamp(40px, 6vw, 64px);
+  }
+
+  /* ---------- Audiences ---------- */
+  .aud__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .aud__card {
+    display: grid;
+    align-content: start;
+    gap: 12px;
+    min-height: 300px;
+    padding: 26px;
+    border-radius: var(--radius-lg);
+    background: var(--yellow);
+    transition: transform 0.5s var(--ease);
+  }
+  .aud__card:nth-child(2) {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .aud__card:hover {
+    transform: translateY(-6px) rotate(-1deg);
+  }
+  .aud__card--soon {
+    background: var(--cream);
+    border: 2px dashed rgba(10, 10, 10, 0.2);
+  }
+  .aud__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 36px;
+  }
+  .aud__icon {
+    display: grid;
+    place-items: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.7);
+  }
+  .aud__card:nth-child(2) .aud__icon {
+    background: rgba(255, 255, 255, 0.14);
+  }
+  .aud__card--soon .aud__icon {
+    background: var(--yellow-tint);
+  }
+  .aud__tag {
+    padding: 5px 11px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    background: rgba(10, 10, 10, 0.1);
+  }
+  .aud__card:nth-child(2) .aud__tag {
+    background: rgba(255, 255, 255, 0.16);
+  }
+  .aud__card--soon .aud__tag {
+    background: var(--ink);
+    color: var(--yellow);
+  }
+  .aud__card h3 {
+    font-size: 1.875rem;
+  }
+  .aud__card p {
+    opacity: 0.8;
+  }
+
+  /* ---------- Features ---------- */
+  .feat {
+    background: var(--cream);
+    border-radius: var(--radius-xl);
+    margin-inline: clamp(8px, 1.5vw, 20px);
+  }
+  .feat__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .feat__item {
+    display: grid;
+    align-content: start;
+    gap: 10px;
+    padding: 24px;
+    border-radius: var(--radius);
+    background: var(--paper);
+    border: 1px solid var(--line);
+    transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+  }
+  .feat__item:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+  }
+  .feat__icon {
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    background: var(--yellow);
+    margin-bottom: 8px;
+  }
+  .feat__item h3 {
+    font-size: 1.3rem;
+    letter-spacing: -0.02em;
+  }
+  .feat__item p {
+    color: var(--muted);
+    font-size: 0.975rem;
+    line-height: 1.55;
+  }
+
+  /* ---------- Steps ---------- */
+  .steps__list {
+    position: relative;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .steps__line {
+    position: absolute;
+    left: 28px;
+    right: 28px;
+    top: 27px;
+    height: 3px;
+    border-radius: 3px;
+    background: rgba(10, 10, 10, 0.1);
+  }
+  .steps__line span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: var(--ink);
+    transform-origin: left;
+    transform: scaleX(var(--p, 1));
+  }
+  .steps__list li {
+    position: relative;
+    display: grid;
+    align-content: start;
+    gap: 10px;
+  }
+  .steps__num {
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--yellow);
+    border: 3px solid var(--paper);
+    box-shadow: 0 0 0 2px var(--ink);
+    font: 800 1.375rem var(--font-display);
+    margin-bottom: 10px;
+  }
+  .steps__list h3 {
+    font-size: 1.5rem;
+  }
+  .steps__list p {
+    color: var(--muted);
+    max-width: 30ch;
+  }
+
+  /* ---------- CTA ---------- */
+  .bcta {
+    padding-block: clamp(24px, 4vw, 40px) clamp(80px, 10vw, 140px);
+  }
+  .bcta__card {
+    display: grid;
+    justify-items: center;
+    text-align: center;
+    gap: 18px;
+    padding: clamp(56px, 8vw, 100px) clamp(20px, 5vw, 64px);
+    border-radius: var(--radius-xl);
+    background: var(--yellow);
+  }
+  .bcta__card h2 {
+    font-size: clamp(2.25rem, 5vw, 4rem);
+    font-weight: 800;
+    max-width: 18ch;
+  }
+  .bcta__card p {
+    font-size: 1.125rem;
+    color: rgba(10, 10, 10, 0.75);
+    max-width: 48ch;
+  }
+  .bcta__btns {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 1080px) {
+    .feat__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .aud__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .bh__chip--1 {
+      left: 8px;
+    }
+    .bh__chip--2 {
+      right: 8px;
+    }
+  }
+  @media (max-width: 760px) {
+    .steps__list {
+      grid-template-columns: 1fr;
+      gap: 28px;
+      padding-left: 76px;
+    }
+    .steps__line {
+      left: 27px;
+      right: auto;
+      top: 28px;
+      bottom: 28px;
+      width: 3px;
+      height: auto;
+    }
+    .steps__line span {
+      transform-origin: top;
+      transform: scaleY(var(--p, 1));
+    }
+    .steps__num {
+      position: absolute;
+      left: -76px;
+      top: 0;
+    }
+    .bh__stage {
+      height: 380px;
+      padding-inline: 12px;
+    }
+    .bh__chip {
+      font-size: 0.8rem;
+      padding: 8px 12px 8px 8px;
+    }
+    .bh__chip--1 {
+      left: 8px;
+      top: auto;
+      bottom: 30px;
+    }
+    .bh__chip--2 {
+      display: none;
+    }
+  }
+  @media (max-width: 560px) {
+    .aud__grid,
+    .feat__grid {
+      grid-template-columns: 1fr;
+    }
+    .aud__card {
+      min-height: 0;
+    }
+    .aud__top {
+      margin-bottom: 12px;
+    }
+    .bh__ctas .btn,
+    .bcta__btns .btn {
+      flex: 1 1 100%;
+    }
+  }
+</style>

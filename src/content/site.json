@@ -12,23 +12,19 @@
   "nav": [
     {
       "label": "Features",
-      "href": "#features"
+      "href": "/#features"
     },
     {
       "label": "How it works",
-      "href": "#how"
+      "href": "/#how"
     },
     {
       "label": "Services",
-      "href": "#services"
-    },
-    {
-      "label": "For businesses",
-      "href": "#business"
+      "href": "/#services"
     },
     {
       "label": "FAQ",
-      "href": "#faq"
+      "href": "/#faq"
     }
   ],
   "hero": {
@@ -179,7 +175,8 @@
       }
     ],
     "cta": "Register your business",
-    "secondary": "Business sign in"
+    "secondary": "Business sign in",
+    "learnMore": "See what you get"
   },
   "faq": {
     "eyebrow": "FAQ",
@@ -214,5 +211,147 @@
   "footer": {
     "tagline": "Pet Care Made Simbly Effortless.",
     "copyright": "Simbly Pet"
+  },
+  "businessPage": {
+    "meta": {
+      "title": "Simbly Pet for Businesses: bookings, staff and reports for pet care",
+      "description": "Groomers, boarders and daycares use Simbly Pet to take bookings, manage staff and branches, and send pet parents reports and photo updates."
+    },
+    "hero": {
+      "eyebrow": "Simbly Pet for businesses",
+      "title": "Run your pet business, simbly.",
+      "subtitle": "Bookings, staff, branches and customer pets in one place, with reports and photo updates that keep pet parents coming back.",
+      "cta": "Register your business",
+      "secondary": "Business sign in"
+    },
+    "audiences": {
+      "eyebrow": "Who it's for",
+      "title": "One business, every service you offer",
+      "subtitle": "Offer grooming, boarding and daycare from one account. Each service is added as a module and checked by our team.",
+      "items": [
+        {
+          "icon": "scissors",
+          "title": "Groomers",
+          "body": "Bookings by service and add-on, groomer assignment, and before-and-after reports.",
+          "tag": "Available"
+        },
+        {
+          "icon": "house",
+          "title": "Boarding",
+          "body": "Rooms and kennels with capacity limits, check-in and check-out, and a care log.",
+          "tag": "Available"
+        },
+        {
+          "icon": "sun",
+          "title": "Daycare",
+          "body": "Day bookings, drop-off and pick-up, and photo updates for parents during the day.",
+          "tag": "Available"
+        },
+        {
+          "icon": "stethoscope",
+          "title": "Vet clinics",
+          "body": "Visit notes that go straight into each pet's health history.",
+          "tag": "Coming soon"
+        }
+      ]
+    },
+    "features": {
+      "eyebrow": "What you get",
+      "title": "Everything to run the day",
+      "items": [
+        {
+          "icon": "calendar-check",
+          "title": "Booking requests",
+          "body": "Parents request a time in the app. Confirm it, decline it, or suggest another slot. Unanswered requests expire, so nobody is left waiting."
+        },
+        {
+          "icon": "calendar-days",
+          "title": "Calendar and walk-ins",
+          "body": "See every branch's day at a glance. Add phone and walk-in bookings, even for customers who don't use the app."
+        },
+        {
+          "icon": "users",
+          "title": "Staff and roles",
+          "body": "Owner, Admin, Manager, Receptionist, Groomer and more. Everyone sees only what their role allows."
+        },
+        {
+          "icon": "store",
+          "title": "Branches and hours",
+          "body": "Run several locations with their own hours, closures, staff and prices. Branch staff only see their branch."
+        },
+        {
+          "icon": "clipboard-list",
+          "title": "Services and pricing",
+          "body": "Build your menu with variants, add-ons and prices per branch, and choose which pets each service is for."
+        },
+        {
+          "icon": "heart",
+          "title": "Customers and pets",
+          "body": "Every pet's details and visit history is ready before they arrive, including customers you add yourself."
+        },
+        {
+          "icon": "camera",
+          "title": "Reports and photo updates",
+          "body": "Send grooming reports with before-and-after photos and stay updates that parents see straight away."
+        },
+        {
+          "icon": "clock",
+          "title": "Availability and time off",
+          "body": "Set staff working hours and time off, and get a warning before a slot is overbooked."
+        }
+      ]
+    },
+    "steps": {
+      "eyebrow": "How to join",
+      "title": "Live in four steps",
+      "items": [
+        {
+          "title": "Register",
+          "body": "Fill in your business details and upload the documents the form asks for."
+        },
+        {
+          "title": "Get verified",
+          "body": "Our team reviews your application. If anything is missing, we'll tell you what to fix."
+        },
+        {
+          "title": "Choose your services",
+          "body": "Pick grooming, boarding or daycare. Each one is approved for your business."
+        },
+        {
+          "title": "Start taking bookings",
+          "body": "Add branches, services and staff. Pet parents can then find you and book in the app."
+        }
+      ]
+    },
+    "faq": {
+      "eyebrow": "FAQ",
+      "title": "Questions from businesses",
+      "items": [
+        {
+          "q": "I offer grooming and boarding. Do I need two accounts?",
+          "a": "No. One business account covers every service you offer. Each service is added as a module."
+        },
+        {
+          "q": "Can I manage more than one branch?",
+          "a": "Yes. Each branch has its own hours, closures, staff and prices, and you can limit staff to the branches they work at."
+        },
+        {
+          "q": "Can I add staff who don't use the app?",
+          "a": "Yes. Add them by name and phone so you can assign bookings to them, and invite them to the app later if you want."
+        },
+        {
+          "q": "What happens after I register?",
+          "a": "Our team reviews your details and documents. Once you're verified and your services are approved, you can set up and start taking bookings."
+        },
+        {
+          "q": "Can I take bookings from customers who aren't on Simbly Pet?",
+          "a": "Yes. Add phone and walk-in bookings yourself, with the customer and pet details kept on your side."
+        }
+      ]
+    },
+    "cta": {
+      "title": "Ready to bring your business to Simbly Pet?",
+      "subtitle": "Register in a few minutes. Our team will verify your details and help you get set up."
+    }
   }
 }

@@ -7,7 +7,7 @@ import site from '../content/site.json';
 <!-- Floating pill header. On phones the links open in a dropdown card under the pill. -->
 <header class="nav" data-nav>
   <div class="nav__pill">
-    <a href="#top" class="brand" aria-label="Simbly Pet home">
+    <a href="/" class="brand" aria-label="Simbly Pet home">
       <Image src={logo} alt="" width={72} height={72} class="brand__mark" loading="eager" />
       <span class="brand__word">Simbly<span>Pet</span></span>
     </a>
@@ -17,8 +17,8 @@ import site from '../content/site.json';
     </nav>
 
     <div class="nav__actions">
-      <a class="nav__biz" href={site.links.businessPortal}>For businesses</a>
-      <a class="btn btn--yellow nav__get" href="#download">Get the app</a>
+      <a class="nav__biz" href="/business" aria-current={Astro.url.pathname.startsWith('/business') ? 'page' : undefined}>For businesses</a>
+      <a class="btn btn--yellow nav__get" href="/#download">Get the app</a>
       <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu" data-menu-toggle>
         <span class="bars" aria-hidden="true"><i></i><i></i></span>
       </button>
@@ -34,8 +34,8 @@ import site from '../content/site.json';
       ))}
     </nav>
     <div class="menu__ctas">
-      <a class="btn btn--yellow" href="#download">Get the app</a>
-      <a class="btn btn--ghost" href={site.links.businessPortal}>For businesses <Icon name="arrow-up-right" size={18} /></a>
+      <a class="btn btn--yellow" href="/#download">Get the app</a>
+      <a class="btn btn--ghost" href="/business">For businesses <Icon name="arrow-right" size={18} /></a>
     </div>
   </div>
 </header>
@@ -126,6 +126,9 @@ import site from '../content/site.json';
   }
   .nav__biz:hover {
     background: rgba(10, 10, 10, 0.06);
+  }
+  .nav__biz[aria-current='page'] {
+    background: var(--yellow-tint);
   }
   .nav__get {
     min-height: 48px;

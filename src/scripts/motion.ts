@@ -54,6 +54,7 @@ const expand = document.querySelector<HTMLElement>('[data-expand]');
 const expandPanel = expand?.firstElementChild as HTMLElement | null;
 const spin = document.querySelector<HTMLElement>('[data-spin]');
 const heroStage = document.querySelector<HTMLElement>('[data-hero-stage]');
+const progressEls = [...document.querySelectorAll<HTMLElement>('[data-progress]')];
 
 const how = document.querySelector<HTMLElement>('[data-how]');
 const steps = [...document.querySelectorAll<HTMLElement>('[data-step]')];
@@ -120,6 +121,11 @@ function update() {
     const r = heroStage.getBoundingClientRect();
     const p = clamp((vh - r.top) / (vh * 0.75) - 0.35);
     heroStage.style.setProperty('--p', p.toFixed(3));
+  }
+
+  for (const el of progressEls) {
+    const r = el.getBoundingClientRect();
+    el.style.setProperty('--p', clamp((vh * 0.8 - r.top) / (r.height + vh * 0.2)).toFixed(3));
   }
 
   if (wordsBox && words.length) {
