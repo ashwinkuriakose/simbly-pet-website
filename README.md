@@ -32,4 +32,8 @@ The app screens on the page are drawn in HTML in `src/components/Screen.astro`, 
 
 ## Deploying
 
-Run `npm run build` and copy `dist/` into the backend repo's `deploy/proxy/static-sites/<name>/`, then point `deploy/proxy/sites/simblypet.caddy` at it (see DEPLOY.md section 11 in `simbly-pet-backend`).
+simblypet.com is served by GitHub Pages from this repo. Pushing to `main` runs `.github/workflows/deploy.yml`, which builds the site and publishes `dist/` (including `CNAME`).
+
+One-time setting: in the repo's Settings → Pages, set **Source** to **GitHub Actions**.
+
+If the site later moves to the Contabo server, copy `dist/` into the backend's `deploy/proxy/static-sites/<name>/` instead (see DEPLOY.md section 11 in `simbly-pet-backend`) and remove `public/CNAME`.
