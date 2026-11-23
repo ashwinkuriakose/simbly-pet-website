@@ -5,6 +5,7 @@ import Footer from '../components/Footer.astro';
 import Faq from '../components/Faq.astro';
 import Icon from '../components/Icon.astro';
 import BizDashboard from '../components/BizDashboard.astro';
+import Contact from '../components/Contact.astro';
 import site from '../content/site.json';
 
 const page = site.businessPage;
@@ -108,6 +109,7 @@ const titleEnd = titleRest.pop();
     </section>
 
     <Faq content={page.faq} />
+    <Contact variant="business" />
 
     <!-- Final call to action -->
     <section class="bcta">

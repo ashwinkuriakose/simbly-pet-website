@@ -1,0 +1,350 @@
+---
+// Contact form. Posts JSON to {PUBLIC_API_URL}/api/v1/public/contact/ (see scripts/contact.ts).
+import Icon from './Icon.astro';
+import site from '../content/site.json';
+
+interface Props {
+  variant?: 'home' | 'business';
+}
+const { variant = 'home' } = Astro.props;
+const { contact } = site;
+const copy = contact[variant];
+const preset = variant === 'business' ? 'business' : 'general';
+const id = (name: string) => `${variant}-${name}`;
+const apiUrl = (import.meta.env.PUBLIC_API_URL || 'https://api.simblypet.com').replace(/\/+$/, '');
+---
+<section class:list={['contact section', `contact--${variant}`]} id="contact">
+  <div class="container contact__grid">
+    <div class="contact__intro">
+      <p class="eyebrow" data-reveal>{copy.eyebrow}</p>
+      <h2 class="h2" data-reveal style="--d:1">{copy.title}</h2>
+      <p class="lede" data-reveal style="--d:2">{copy.subtitle}</p>
+      <ul class="contact__points">
+        {copy.points.map((p, i) => (
+          <li data-reveal style={`--d:${i + 3}`}>
+            <span class="contact__icon"><Icon name={p.icon} size={20} /></span>
+            <div><b>{p.title}</b><span>{p.body}</span></div>
+          </li>
+        ))}
+      </ul>
+      {variant === 'business' && (
+        <a class="btn btn--ghost contact__portal" href={site.links.businessPortal} data-reveal style="--d:5">
+          Register at the business portal <Icon name="arrow-up-right" size={18} />
+        </a>
+      )}
+    </div>
+
+    <div class="contact__card" data-reveal="right" style="--d:1">
+      <form
+        class="form"
+        novalidate
+        data-contact-form
+        data-endpoint={`${apiUrl}/api/v1/public/contact/`}
+        data-msg-success={contact.success}
+        data-msg-ratelimit={contact.rateLimited}
+        data-msg-network={contact.networkError}
+        aria-labelledby={id('form-title')}
+      >
+        <h3 class="form__title" id={id('form-title')}>Send us a message</h3>
+
+        <div class="form__status" data-status role="alert" tabindex="-1" hidden></div>
+
+        <fieldset class="field">
+          <legend class="field__label">What's it about?</legend>
+          <div class="chips">
+            {contact.types.map((t) => (
+              <label class="chip">
+                <input type="radio" name="enquiry_type" value={t.value} checked={t.value === preset} />
+                <span>{t.label}</span>
+              </label>
+            ))}
+          </div>
+          <p class="field__error" id={id('enquiry_type-error')} data-error-for="enquiry_type" hidden></p>
+        </fieldset>
+
+        <div class="field" data-business-only hidden={preset !== 'business'}>
+          <label class="field__label" for={id('business_name')}>Business name</label>
+          <input class="input" id={id('business_name')} name="business_name" maxlength="160" autocomplete="organization" aria-describedby={id('business_name-error')} />
+          <p class="field__error" id={id('business_name-error')} data-error-for="business_name" hidden></p>
+        </div>
+
+        <div class="form__row">
+          <div class="field">
+            <label class="field__label" for={id('name')}>Your name</label>
+            <input class="input" id={id('name')} name="name" required minlength="2" maxlength="120" autocomplete="name" aria-describedby={id('name-error')} />
+            <p class="field__error" id={id('name-error')} data-error-for="name" hidden></p>
+          </div>
+          <div class="field">
+            <label class="field__label" for={id('email')}>Email</label>
+            <input class="input" id={id('email')} name="email" type="email" required autocomplete="email" inputmode="email" aria-describedby={id('email-error')} />
+            <p class="field__error" id={id('email-error')} data-error-for="email" hidden></p>
+          </div>
+        </div>
+
+        <div class="form__row">
+          <div class="field">
+            <label class="field__label" for={id('phone')}>Phone <span class="opt">(optional)</span></label>
+            <input class="input" id={id('phone')} name="phone" type="tel" maxlength="30" autocomplete="tel" aria-describedby={id('phone-error')} />
+            <p class="field__error" id={id('phone-error')} data-error-for="phone" hidden></p>
+          </div>
+          <div class="field">
+            <label class="field__label" for={id('city')}>City <span class="opt">(optional)</span></label>
+            <input class="input" id={id('city')} name="city" maxlength="100" autocomplete="address-level2" aria-describedby={id('city-error')} />
+            <p class="field__error" id={id('city-error')} data-error-for="city" hidden></p>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="field__label" for={id('message')}>Message</label>
+          <textarea class="input input--area" id={id('message')} name="message" rows="5" required minlength="10" maxlength="5000" aria-describedby={`${id('message-hint')} ${id('message-error')}`}></textarea>
+          <p class="field__hint" id={id('message-hint')}>At least 10 characters.</p>
+          <p class="field__error" id={id('message-error')} data-error-for="message" hidden></p>
+        </div>
+
+        <!-- Honeypot: hidden from people and screen readers; bots tend to fill it. -->
+        <div class="hp" aria-hidden="true">
+          <label for={id('website')}>Website</label>
+          <input id={id('website')} name="website" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <button class="btn form__submit" type="submit" data-submit>
+          <span data-label>Send message</span>
+          <Icon name="arrow-right" size={18} />
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  import '../scripts/contact.ts';
+</script>
+
+<style>
+  .contact__grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: clamp(32px, 6vw, 88px);
+    align-items: start;
+  }
+  .contact__intro {
+    display: grid;
+    gap: 18px;
+    position: sticky;
+    top: 120px;
+  }
+  .contact__points {
+    list-style: none;
+    margin: 12px 0 0;
+    padding: 0;
+    display: grid;
+    gap: 18px;
+  }
+  .contact__points li {
+    display: flex;
+    gap: 14px;
+  }
+  .contact__points div {
+    display: grid;
+    gap: 2px;
+  }
+  .contact__points b {
+    font-weight: 700;
+  }
+  .contact__points span:not(.contact__icon) {
+    color: var(--muted);
+    font-size: 0.975rem;
+  }
+  .contact__icon {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    background: var(--yellow);
+  }
+  .contact__portal {
+    justify-self: start;
+    margin-top: 8px;
+  }
+  .contact__card {
+    padding: clamp(22px, 3.4vw, 40px);
+    border-radius: var(--radius-lg);
+    background: var(--cream);
+    border: 1px solid var(--line);
+  }
+  .contact--business .contact__card {
+    background: var(--yellow-tint);
+  }
+
+  .form {
+    display: grid;
+    gap: 20px;
+  }
+  .form__title {
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+  .form__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .field {
+    display: grid;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    min-width: 0;
+  }
+  .field[hidden] {
+    display: none;
+  }
+  .field__label {
+    padding: 0;
+    font-weight: 650;
+    font-size: 0.9375rem;
+  }
+  .opt {
+    font-weight: 500;
+    color: var(--muted);
+  }
+  .input {
+    width: 100%;
+    min-height: 52px;
+    padding: 12px 16px;
+    border-radius: 14px;
+    border: 1.5px solid rgba(10, 10, 10, 0.16);
+    background: var(--paper);
+    color: var(--ink);
+    font: 500 1rem/1.4 var(--font-body);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .input:hover {
+    border-color: rgba(10, 10, 10, 0.32);
+  }
+  .input:focus {
+    outline: none;
+    border-color: var(--ink);
+    box-shadow: 0 0 0 4px rgba(255, 187, 3, 0.45);
+  }
+  .input[aria-invalid='true'] {
+    border-color: #c0392b;
+  }
+  .input--area {
+    resize: vertical;
+    min-height: 140px;
+  }
+  .field__hint {
+    color: var(--muted);
+    font-size: 0.8125rem;
+  }
+  .field__error {
+    display: flex;
+    gap: 6px;
+    color: #b42318;
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+  .field__error[hidden] {
+    display: none;
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .chip {
+    position: relative;
+    cursor: pointer;
+  }
+  .chip input {
+    position: absolute;
+    opacity: 0;
+    inset: 0;
+    margin: 0;
+    cursor: pointer;
+  }
+  .chip span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: 1.5px solid rgba(10, 10, 10, 0.16);
+    background: var(--paper);
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+  }
+  .chip:hover span {
+    border-color: rgba(10, 10, 10, 0.4);
+  }
+  .chip input:checked + span {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--paper);
+  }
+  .chip input:focus-visible + span {
+    outline: 3px solid var(--ink);
+    outline-offset: 2px;
+  }
+
+  .form__status {
+    padding: 14px 16px;
+    border-radius: 14px;
+    font-weight: 600;
+    line-height: 1.45;
+  }
+  .form__status:focus {
+    outline: 3px solid var(--ink);
+    outline-offset: 2px;
+  }
+  .form__status[data-kind='success'] {
+    background: #dcf5e6;
+    color: #0f5132;
+  }
+  .form__status[data-kind='error'] {
+    background: #fdecea;
+    color: #8a1c12;
+  }
+
+  .form__submit {
+    justify-self: start;
+    min-width: 200px;
+  }
+  .form__submit[aria-busy='true'] {
+    opacity: 0.7;
+    cursor: progress;
+  }
+
+  .hp {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    left: -9999px;
+  }
+
+  @media (max-width: 900px) {
+    .contact__grid {
+      grid-template-columns: 1fr;
+    }
+    .contact__intro {
+      position: static;
+    }
+  }
+  @media (max-width: 560px) {
+    .form__row {
+      grid-template-columns: 1fr;
+    }
+    .form__submit {
+      justify-self: stretch;
+    }
+  }
+</style>

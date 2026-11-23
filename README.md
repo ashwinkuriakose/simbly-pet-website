@@ -22,6 +22,10 @@ All page text, links and FAQ entries live in [`src/content/site.json`](src/conte
 
 The app screens on the page are drawn in HTML in `src/components/Screen.astro`, not screenshots, so they stay crisp and are easy to update.
 
+## Contact form
+
+The "Contact us" sections (home page, and a business version on `/business`) post JSON to `{PUBLIC_API_URL}/api/v1/public/contact/` with no cookies. `PUBLIC_API_URL` is read at build time and defaults to `https://api.simblypet.com`; the deploy workflow sets it explicitly. To test against a local API, copy `.env.example` to `.env` (or run `PUBLIC_API_URL=http://localhost:8000 npm run dev`) and open the site at `http://localhost:4321`, which is the origin the API allows. Messages show up on the admin dashboard's "Website enquiries" page. Form logic lives in `src/scripts/contact.ts`.
+
 ## Structure
 
 - `src/pages/index.astro`: the page, assembled from section components.

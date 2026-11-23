@@ -25,6 +25,10 @@
     {
       "label": "FAQ",
       "href": "/#faq"
+    },
+    {
+      "label": "Contact",
+      "href": "/#contact"
     }
   ],
   "hero": {
@@ -353,5 +357,66 @@
       "title": "Ready to bring your business to Simbly Pet?",
       "subtitle": "Register in a few minutes. Our team will verify your details and help you get set up."
     }
+  },
+  "contact": {
+    "types": [
+      {
+        "value": "general",
+        "label": "General question"
+      },
+      {
+        "value": "business",
+        "label": "Business wanting to join"
+      },
+      {
+        "value": "support",
+        "label": "Help with the app"
+      },
+      {
+        "value": "feedback",
+        "label": "Feedback"
+      },
+      {
+        "value": "partnership",
+        "label": "Partnership or press"
+      }
+    ],
+    "home": {
+      "eyebrow": "Contact us",
+      "title": "Questions? Say hello.",
+      "subtitle": "Send us a message and our team will get back to you by email.",
+      "points": [
+        {
+          "icon": "clock",
+          "title": "Quick replies",
+          "body": "We read every message and reply as soon as we can."
+        },
+        {
+          "icon": "store",
+          "title": "Run a pet business?",
+          "body": "Pick \"Business wanting to join\" and tell us a little about it."
+        }
+      ]
+    },
+    "business": {
+      "eyebrow": "Talk to us",
+      "title": "Want to bring your business on board?",
+      "subtitle": "Tell us about your business and we'll help you get set up. Prefer to start now? Register at the business portal.",
+      "points": [
+        {
+          "icon": "shield-check",
+          "title": "Verified businesses only",
+          "body": "Our team reviews every business before it can take bookings."
+        },
+        {
+          "icon": "users",
+          "title": "Help with setup",
+          "body": "We'll walk you through services, branches and staff."
+        }
+      ]
+    },
+    "success": "Thanks for getting in touch. We'll get back to you soon.",
+    "rateLimited": "You've sent a few messages already. Please try again later.",
+    "networkError": "We couldn't send your message. Check your connection and try again. Your message is still here."
   }
 }
