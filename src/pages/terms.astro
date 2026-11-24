@@ -1,0 +1,137 @@
+---
+import LegalPage from '../layouts/LegalPage.astro';
+import Fill from '../components/Fill.astro';
+import site from '../content/site.json';
+
+const c = site.company;
+const toc = [
+  { id: 'agreement', label: 'Agreement' },
+  { id: 'accounts', label: 'Your account' },
+  { id: 'service', label: 'What Simbly Pet is' },
+  { id: 'not-vet', label: 'Not veterinary advice' },
+  { id: 'bookings', label: 'Bookings with businesses' },
+  { id: 'content', label: 'Your content' },
+  { id: 'acceptable-use', label: 'Acceptable use' },
+  { id: 'business-terms', label: 'Business accounts' },
+  { id: 'ip', label: 'Our rights' },
+  { id: 'availability', label: 'Availability and changes' },
+  { id: 'termination', label: 'Suspension and closing' },
+  { id: 'liability', label: 'Disclaimers and liability' },
+  { id: 'law', label: 'Governing law' },
+  { id: 'contact', label: 'Contact' },
+];
+---
+<LegalPage
+  title="Terms of Use · Simbly Pet"
+  description="The terms for using Simbly Pet (powered by Inkore Technologies) for pet parents and pet businesses."
+  heading="Terms of Use"
+  intro="These terms are the rules for using Simbly Pet. Please read them; by creating an account or using the service you agree to them."
+  toc={toc}
+>
+  <section id="agreement">
+    <h2>1. Agreement</h2>
+    <p>These terms are an agreement between you and {c.name} ("we", "us"), which makes {c.product}. They cover the {c.product} mobile apps, the business dashboard and simblypet.com (together, "the service"). Our <a href="/privacy">Privacy Policy</a> explains how we handle your information and is part of these terms.</p>
+    <p>If you use the service on behalf of a business, you agree to these terms for that business and confirm you're allowed to.</p>
+  </section>
+
+  <section id="accounts">
+    <h2>2. Your account</h2>
+    <ul>
+      <li>You must be at least 18 years old to create an account.</li>
+      <li>Give accurate details and keep them up to date.</li>
+      <li>Keep your password private. You're responsible for what happens in your account; tell us straight away if you think someone else has used it.</li>
+      <li>One person per account. Use pet sharing to give family members access instead of sharing a login.</li>
+    </ul>
+  </section>
+
+  <section id="service">
+    <h2>3. What Simbly Pet is</h2>
+    <p>{c.product} helps you keep your pets' profiles, health records and reminders in one place, share them with family, and find and book services such as grooming, boarding and daycare from businesses listed on the service.</p>
+    <p>The service is free for pet parents right now. If we introduce paid features, we'll show the price clearly before you pay, and you won't be charged without agreeing.</p>
+  </section>
+
+  <section id="not-vet">
+    <h2>4. Not veterinary advice</h2>
+    <p>{c.product} is a record-keeping and booking tool. Reminders, schedules and other information in the app are there to help you, not to replace a qualified veterinarian. Always ask a vet about your pet's health, and contact one urgently in an emergency. Check that important dates such as vaccination due dates are correct.</p>
+  </section>
+
+  <section id="bookings">
+    <h2>5. Bookings with businesses</h2>
+    <ul>
+      <li>Businesses on {c.product} are independent. They, not {c.name}, provide the services and are responsible for their quality, safety, prices and staff.</li>
+      <li>A booking request isn't confirmed until the business accepts it. The business may decline, suggest another time, or let the request expire.</li>
+      <li>Prices shown are set by the business. Unless the app says otherwise, you pay the business directly, and refunds and cancellations follow the business's own policy.</li>
+      <li>Give the business accurate information about your pet, including health, behaviour and vaccination status, so they can care for it safely.</li>
+      <li>We verify a business's documents before it can take bookings, but we can't guarantee every business's conduct. If something goes wrong, tell us and we'll look into it.</li>
+    </ul>
+  </section>
+
+  <section id="content">
+    <h2>6. Your content</h2>
+    <p>You own the information, photos and documents you add ("your content"). You give us permission to store, copy and display your content only as needed to run the service for you, including showing it to people and businesses you share it with. This permission ends when you delete the content or your account, except for copies others still need (for example, a pet you share with a co-owner).</p>
+    <p>Only upload content you have the right to share, and nothing that is unlawful or that infringes someone else's rights.</p>
+  </section>
+
+  <section id="acceptable-use">
+    <h2>7. Acceptable use</h2>
+    <p>Don't:</p>
+    <ul>
+      <li>break the law, or use the service to harm animals or people;</li>
+      <li>impersonate anyone, or make fake bookings, reviews or business listings;</li>
+      <li>harass businesses, staff or other users, or send spam;</li>
+      <li>access accounts, pets or records that aren't yours, or try to get around security or access limits;</li>
+      <li>copy, scrape or resell the service or its data, or interfere with how it runs;</li>
+      <li>upload viruses or harmful code.</li>
+    </ul>
+  </section>
+
+  <section id="business-terms">
+    <h2>8. Business accounts</h2>
+    <p>If you register a business:</p>
+    <ul>
+      <li>Give true information and documents for verification. We may approve, decline or ask for more information, and we decide which service modules to enable.</li>
+      <li>Keep your profile, services, prices, opening hours and availability accurate, and respond to booking requests promptly.</li>
+      <li>You're responsible for your staff's access and actions in your account. Give each person only the access they need.</li>
+      <li>Use customer and pet information only to provide your services to that customer, keep it confidential, and follow applicable law, including data protection law. Don't use it for unrelated marketing.</li>
+      <li>You're responsible for the services you provide, any licences they require, and the records you create (such as grooming reports or care updates).</li>
+      <li>Any fees for business features will be agreed with you separately before they apply.</li>
+    </ul>
+  </section>
+
+  <section id="ip">
+    <h2>9. Our rights</h2>
+    <p>The service, the {c.product} name and logo, and our designs and software belong to {c.name}. We give you a personal, non-transferable right to use the service under these terms. Feedback you send us may be used to improve the service without any obligation to you.</p>
+  </section>
+
+  <section id="availability">
+    <h2>10. Availability and changes</h2>
+    <p>We work to keep the service running, but it may sometimes be unavailable for maintenance or reasons outside our control. We may add, change or remove features. We may update these terms; we'll change the date at the top and tell you about important changes in advance. If you keep using the service after changes take effect, you accept them.</p>
+  </section>
+
+  <section id="termination">
+    <h2>11. Suspension and closing</h2>
+    <p>You can stop using the service and <a href="/delete-account">delete your account</a> at any time. We may suspend or close an account that breaks these terms, puts others at risk, or where the law requires it. Where it's reasonable, we'll tell you why first and give you a chance to respond.</p>
+  </section>
+
+  <section id="liability">
+    <h2>12. Disclaimers and liability</h2>
+    <p>The service is provided "as is" and "as available". To the extent the law allows, we don't promise it will be error-free or uninterrupted, and we aren't responsible for the services businesses provide, or for losses caused by inaccurate information entered by you, other users or businesses.</p>
+    <p>To the extent the law allows, {c.name} is not liable for indirect or consequential losses, and our total liability to you for any claim is limited to the amount you paid us in the 12 months before the claim, or ₹1,000 if you paid nothing. Nothing in these terms limits liability that can't be limited by law.</p>
+    <p>You agree to cover losses we suffer because you broke these terms or the law.</p>
+  </section>
+
+  <section id="law">
+    <h2>13. Governing law</h2>
+    <p>These terms are governed by the laws of India. If a dispute comes up, please contact us first so we can try to solve it. Otherwise, the courts at <Fill value={c.jurisdiction} /> have jurisdiction.</p>
+  </section>
+
+  <section id="contact">
+    <h2>14. Contact</h2>
+    <address>
+      {c.name}<br />
+      <Fill value={c.address} /><br />
+      Email: <Fill value={c.email} mail />
+    </address>
+    <p>Or use the <a href="/support">support page</a>.</p>
+  </section>
+</LegalPage>

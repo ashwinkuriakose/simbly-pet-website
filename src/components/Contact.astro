@@ -4,12 +4,12 @@ import Icon from './Icon.astro';
 import site from '../content/site.json';
 
 interface Props {
-  variant?: 'home' | 'business';
+  variant?: 'home' | 'business' | 'support';
 }
 const { variant = 'home' } = Astro.props;
 const { contact } = site;
 const copy = contact[variant];
-const preset = variant === 'business' ? 'business' : 'general';
+const preset = variant === 'home' ? 'general' : variant;
 const id = (name: string) => `${variant}-${name}`;
 const apiUrl = (import.meta.env.PUBLIC_API_URL || 'https://api.simblypet.com').replace(/\/+$/, '');
 ---
@@ -111,6 +111,7 @@ const apiUrl = (import.meta.env.PUBLIC_API_URL || 'https://api.simblypet.com').r
           <span data-label>Send message</span>
           <Icon name="arrow-right" size={18} />
         </button>
+        <p class="form__legal">We use your details only to reply to you. See our <a href="/privacy">Privacy Policy</a>.</p>
       </form>
     </div>
   </div>
@@ -121,6 +122,14 @@ const apiUrl = (import.meta.env.PUBLIC_API_URL || 'https://api.simblypet.com').r
 </script>
 
 <style>
+  .form__legal {
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+  .form__legal a {
+    color: inherit;
+  }
   .contact__grid {
     display: grid;
     grid-template-columns: 0.9fr 1.1fr;

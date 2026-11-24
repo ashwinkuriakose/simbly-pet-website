@@ -214,7 +214,8 @@
   },
   "footer": {
     "tagline": "Pet Care Made Simbly Effortless.",
-    "copyright": "Simbly Pet"
+    "copyright": "Simbly Pet",
+    "madeBy": "Powered By Inkore Technologies."
   },
   "businessPage": {
     "meta": {
@@ -417,6 +418,32 @@
     },
     "success": "Thanks for getting in touch. We'll get back to you soon.",
     "rateLimited": "You've sent a few messages already. Please try again later.",
-    "networkError": "We couldn't send your message. Check your connection and try again. Your message is still here."
+    "networkError": "We couldn't send your message. Check your connection and try again. Your message is still here.",
+    "support": {
+      "eyebrow": "Get help",
+      "title": "Tell us what's wrong.",
+      "subtitle": "Send us a message from the email you use in the app and we'll reply by email.",
+      "points": [
+        {
+          "icon": "clock",
+          "title": "Quick replies",
+          "body": "We read every message and reply as soon as we can."
+        },
+        {
+          "icon": "shield-check",
+          "title": "Never share your password",
+          "body": "We will never ask for it. Just tell us your account email."
+        }
+      ]
+    }
+  },
+  "company": {
+    "name": "Inkore Technologies",
+    "product": "Simbly Pet",
+    "address": "[Registered address of Inkore Technologies]",
+    "email": "[contact email, e.g. support@simblypet.com]",
+    "grievanceOfficer": "[Name of grievance officer]",
+    "jurisdiction": "[City], India",
+    "legalUpdated": "24 November 2026"
   }
 }

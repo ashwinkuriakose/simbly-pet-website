@@ -1,0 +1,169 @@
+---
+import LegalPage from '../layouts/LegalPage.astro';
+import Fill from '../components/Fill.astro';
+import site from '../content/site.json';
+
+const c = site.company;
+const toc = [
+  { id: 'who', label: 'Who we are' },
+  { id: 'collect', label: 'What we collect' },
+  { id: 'use', label: 'How we use it' },
+  { id: 'share', label: 'Who can see it' },
+  { id: 'businesses', label: 'Pet businesses' },
+  { id: 'providers', label: 'Service providers' },
+  { id: 'keep', label: 'How long we keep it' },
+  { id: 'rights', label: 'Your rights and choices' },
+  { id: 'security', label: 'Security' },
+  { id: 'children', label: 'Age limit' },
+  { id: 'changes', label: 'Changes' },
+  { id: 'contact', label: 'Contact and grievances' },
+];
+---
+<LegalPage
+  title="Privacy Policy · Simbly Pet"
+  description="How Simbly Pet (powered by Inkore Technologies) collects, uses and protects your information and your pet's records."
+  heading="Privacy Policy"
+  intro="This explains what information Simbly Pet collects, why we need it, who can see it, and the choices you have."
+  toc={toc}
+>
+  <div class="callout">
+    <p><b>The short version</b></p>
+    <ul>
+      <li>We collect what we need to run the app: your account, your pets and their records, and the bookings you make.</li>
+      <li>Your pet's records are yours. Only you, the people you share a pet with, and businesses you book with can see them.</li>
+      <li>We don't sell your information or use it for third-party advertising.</li>
+      <li>You can download or correct your data, and you can ask us to delete your account at any time.</li>
+    </ul>
+  </div>
+
+  <section id="who">
+    <h2>1. Who we are</h2>
+    <p>{c.product} is powered by {c.name}, which owns and operates it ("{c.name}", "we", "us"). We run the {c.product} mobile apps, the business dashboard and the website at simblypet.com (together, "the service").</p>
+    <p>For the personal data you give us, {c.name} is the data fiduciary under India's Digital Personal Data Protection Act, 2023, and we handle it in line with the Information Technology Act, 2000 and its rules.</p>
+    <address>
+      {c.name}<br />
+      <Fill value={c.address} /><br />
+      Email: <Fill value={c.email} mail />
+    </address>
+  </section>
+
+  <section id="collect">
+    <h2>2. What we collect</h2>
+    <h3>Information you give us</h3>
+    <ul>
+      <li><b>Account details:</b> your name, email address, phone number and password (we store only a secure hash of it, never the password itself).</li>
+      <li><b>Profile details:</b> things you choose to add, such as a profile photo and your city.</li>
+      <li><b>Pet profiles:</b> your pet's name, species, breed, sex, date of birth, photos and similar details.</li>
+      <li><b>Health and care records:</b> vaccinations, deworming, medications, allergies, conditions, weights, vet visits, notes and documents or photos you upload.</li>
+      <li><b>Reminders</b> you create or that are created from your pet's records.</li>
+      <li><b>Bookings:</b> the business, service, date, pets and any instructions you give, such as care notes for a boarding stay.</li>
+      <li><b>Messages to us:</b> what you send through our contact form or by email.</li>
+    </ul>
+    <h3>Information created when you use the service</h3>
+    <ul>
+      <li><b>Records from businesses you book with:</b> for example a grooming report with before and after photos, boarding care updates, or visit notes a clinic adds to your pet's health history.</li>
+      <li><b>Device and notification data:</b> a push notification token for your device (used only to send you notifications), your device type and app version.</li>
+      <li><b>Security and usage logs:</b> IP address, sign-in times and a record of important account actions, used to keep accounts safe and fix problems.</li>
+    </ul>
+    <h3>Business accounts</h3>
+    <p>If you register a business, we also collect the business's name, contact details, address, branches, services, prices, staff, and the verification documents you upload for our review.</p>
+    <p>We don't collect your precise location, contacts or payment card details.</p>
+  </section>
+
+  <section id="use">
+    <h2>3. How we use it</h2>
+    <ul>
+      <li>To create and run your account and keep your pets' records in one place.</li>
+      <li>To send reminders and notifications you've asked for, such as an upcoming vaccination or a booking update.</li>
+      <li>To let you share a pet with family members or co-owners.</li>
+      <li>To pass booking requests to businesses and show you their replies and reports.</li>
+      <li>To verify businesses before they can accept bookings.</li>
+      <li>To answer your questions and support requests.</li>
+      <li>To keep the service secure, prevent misuse and fix problems.</li>
+      <li>To improve the service using aggregated information that doesn't identify you.</li>
+      <li>To meet our legal obligations.</li>
+    </ul>
+    <p>We process your information because you've given consent when you sign up and use the features, or where the law allows or requires it. You can withdraw consent at any time by deleting your account; this doesn't affect anything we did before.</p>
+  </section>
+
+  <section id="share">
+    <h2>4. Who can see it</h2>
+    <ul>
+      <li><b>You,</b> and anyone you share a pet with (co-owners and family members), at the access level you choose.</li>
+      <li><b>Businesses you book with</b> see what they need for the booking. See the next section.</li>
+      <li><b>Our service providers,</b> who process data for us under contract (section 6).</li>
+      <li><b>Our authorised staff,</b> only when needed to support you, review a business, or keep the service safe.</li>
+      <li><b>Authorities,</b> when the law requires it, or to protect someone's safety or our legal rights.</li>
+      <li><b>A buyer or successor,</b> if {c.name} or {c.product} is merged or sold, under the same protections.</li>
+    </ul>
+    <p>We do not sell your personal data, and we don't share it with advertisers.</p>
+  </section>
+
+  <section id="businesses">
+    <h2>5. Pet businesses</h2>
+    <p>When you send a booking request, the business sees your name and contact details, the pets on the booking and the details you include. For the services they provide, such as boarding, they may also see care instructions you add.</p>
+    <p>Businesses can't browse your pet's full health history. Records they create for your pet (like a grooming report or visit notes) are shared with you and become part of your pet's history.</p>
+    <p>Each business is responsible for how it uses information it gets through {c.product}, and for any records it keeps about its own walk-in or phone customers. Businesses agree to use that information only to serve their customers.</p>
+  </section>
+
+  <section id="providers">
+    <h2>6. Service providers</h2>
+    <p>We use trusted providers to run the service, for example:</p>
+    <ul>
+      <li>cloud hosting and storage for the app, its database and uploaded files;</li>
+      <li>Firebase Cloud Messaging (Google) to deliver push notifications;</li>
+      <li>an email service to send account and verification emails.</li>
+    </ul>
+    <p>They may only use your data to provide their service to us. Some of these providers store data on servers outside India. When that happens we take steps to keep it protected as this policy describes and as Indian law requires.</p>
+  </section>
+
+  <section id="keep">
+    <h2>7. How long we keep it</h2>
+    <p>We keep your information while your account is open. When you delete your account, we delete or anonymise your personal data within 30 days, except:</p>
+    <ul>
+      <li>records a business needs to keep about bookings and services it provided;</li>
+      <li>pets you share with others stay available to the other owners;</li>
+      <li>security and audit logs, which we keep for up to 180 days;</li>
+      <li>anything we must keep longer by law, or to resolve a dispute.</li>
+    </ul>
+    <p>Backups are overwritten on a rolling basis. See <a href="/delete-account">Delete your account</a> for the details.</p>
+  </section>
+
+  <section id="rights">
+    <h2>8. Your rights and choices</h2>
+    <ul>
+      <li><b>Access and correction:</b> see and edit your account and pet details in the app at any time, or ask us for a summary of the data we hold about you.</li>
+      <li><b>Deletion:</b> ask us to delete your account and personal data. See <a href="/delete-account">how to delete your account</a>.</li>
+      <li><b>Withdraw consent:</b> stop sharing a pet, turn off notifications in your device settings, or delete your account.</li>
+      <li><b>Nominate someone:</b> name a person who can exercise these rights for you if you die or can't act yourself.</li>
+      <li><b>Complain:</b> contact our grievance officer (section 12). If you're not satisfied with our reply, you can complain to the Data Protection Board of India.</li>
+    </ul>
+    <p>We'll reply to requests within 30 days and may need to confirm your identity first.</p>
+  </section>
+
+  <section id="security">
+    <h2>9. Security</h2>
+    <p>We use encrypted connections (HTTPS), hash passwords, keep uploaded files private behind short-lived links, and limit staff access to what their job needs. No system is perfectly secure, so please use a strong password that you don't use anywhere else. If a breach affects your data, we'll tell you and the authorities as the law requires.</p>
+  </section>
+
+  <section id="children">
+    <h2>10. Age limit</h2>
+    <p>{c.product} is for people aged 18 or over. We don't knowingly collect data from children. If you think a child has given us personal data, contact us and we'll delete it.</p>
+  </section>
+
+  <section id="changes">
+    <h2>11. Changes to this policy</h2>
+    <p>We may update this policy as the service grows. We'll change the date at the top, and for important changes we'll tell you in the app or by email before they take effect.</p>
+  </section>
+
+  <section id="contact">
+    <h2>12. Contact and grievances</h2>
+    <p>For privacy questions, data requests or complaints, contact our grievance officer:</p>
+    <address>
+      <Fill value={c.grievanceOfficer} />, Grievance Officer<br />
+      {c.name}, <Fill value={c.address} /><br />
+      Email: <Fill value={c.email} mail />
+    </address>
+    <p>You can also use the <a href="/support">support page</a>. We'll acknowledge complaints within 48 hours and aim to resolve them within 30 days.</p>
+  </section>
+</LegalPage>

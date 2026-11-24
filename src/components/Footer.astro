@@ -26,10 +26,17 @@ const year = new Date().getFullYear();
         <a href={site.links.businessPortal}>Register your business</a>
         <a href={site.links.businessPortal}>Business sign in</a>
       </div>
+      <nav class="foot__col" aria-label="Legal and help">
+        <b>Help &amp; legal</b>
+        <a href="/support">Support</a>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Use</a>
+        <a href="/delete-account">Delete your account</a>
+      </nav>
     </div>
     <p class="foot__huge" aria-hidden="true">Simbly Pet</p>
     <div class="foot__bottom">
-      <span>© {year} {site.footer.copyright}. All rights reserved.</span>
+      <span>© {year} {site.footer.copyright}. All rights reserved. {site.footer.madeBy}</span>
       <a href="#main" class="foot__up">Back to top <Icon name="arrow-up-right" size={16} /></a>
     </div>
   </div>
@@ -45,7 +52,7 @@ const year = new Date().getFullYear();
   }
   .foot__top {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-columns: 1.6fr 1fr 1fr 1fr;
     gap: 40px;
   }
   .foot__brand {

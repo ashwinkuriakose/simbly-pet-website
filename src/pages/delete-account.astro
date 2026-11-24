@@ -1,0 +1,83 @@
+---
+import LegalPage from '../layouts/LegalPage.astro';
+import Fill from '../components/Fill.astro';
+import site from '../content/site.json';
+
+const c = site.company;
+---
+<LegalPage
+  title="Delete your account · Simbly Pet"
+  description="How to delete your Simbly Pet account and data, what gets deleted and what is kept."
+  eyebrow="Your data"
+  heading="Delete your Simbly Pet account"
+  intro="You can ask us to delete your Simbly Pet account and the personal data linked to it at any time. Here's how, and what happens next."
+>
+  <section id="how">
+    <h2>How to request deletion</h2>
+    <ol>
+      <li>Send a request from the email address you use for your {c.product} account, either:
+        <ul>
+          <li>by email to <Fill value={c.email} mail /> with the subject "Delete my account", or</li>
+          <li>through our <a href="/support">support page</a>: choose "Help with the app" and write "Delete my account".</li>
+        </ul>
+      </li>
+      <li>We'll reply to confirm the request came from you. We'll never ask for your password.</li>
+      <li>Once confirmed, we sign you out of all devices and delete your account within 30 days. We'll email you when it's done.</li>
+    </ol>
+    <p>If you run a business on {c.product}, ask us to close the business account the same way. If other staff still use it, the owner needs to make the request.</p>
+  </section>
+
+  <section id="deleted">
+    <h2>What we delete</h2>
+    <ul>
+      <li>your account, profile and sign-in details;</li>
+      <li>pets you own alone, with their profiles, health records, reminders, photos and documents;</li>
+      <li>your notification tokens and app settings;</li>
+      <li>your access to pets other people have shared with you.</li>
+    </ul>
+  </section>
+
+  <section id="kept">
+    <h2>What we keep, and for how long</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th scope="col">Data</th><th scope="col">Why</th><th scope="col">How long</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Pets you share with co-owners</td>
+            <td>They stay with the other owners, who also look after the pet. Your name is removed from them.</td>
+            <td>Until the other owners delete them</td>
+          </tr>
+          <tr>
+            <td>Booking and service records held by businesses</td>
+            <td>Businesses need records of the services they provided (for example invoices or care logs).</td>
+            <td>As long as the business needs them or the law requires</td>
+          </tr>
+          <tr>
+            <td>Security and audit logs</td>
+            <td>To protect accounts and investigate misuse.</td>
+            <td>Up to 180 days</td>
+          </tr>
+          <tr>
+            <td>Data we must keep by law</td>
+            <td>For example to meet tax rules or resolve a dispute.</td>
+            <td>Only as long as required</td>
+          </tr>
+          <tr>
+            <td>Backups</td>
+            <td>Copies are overwritten as backups rotate.</td>
+            <td>Up to 30 days</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Deletion can't be undone. If you only want to remove some information, you can delete individual pets, records or photos in the app instead, without closing your account.</p>
+  </section>
+
+  <section id="help">
+    <h2>Questions</h2>
+    <p>Contact us at <Fill value={c.email} mail /> or read our <a href="/privacy">Privacy Policy</a>.</p>
+  </section>
+</LegalPage>

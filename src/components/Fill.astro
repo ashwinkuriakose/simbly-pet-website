@@ -1,0 +1,11 @@
+---
+// Prints a company detail from site.json. Values still in [brackets] are highlighted so they're easy to spot before launch.
+// With `mail`, a real address becomes a mailto link.
+interface Props {
+  value: string;
+  mail?: boolean;
+}
+const { value, mail = false } = Astro.props;
+const missing = value.startsWith('[');
+---
+{missing ? <mark class="fill">{value}</mark> : mail ? <a href={`mailto:${value}`}>{value}</a> : value}
