@@ -4,12 +4,42 @@ import '@fontsource-variable/figtree';
 import '../styles/global.css';
 import site from '../content/site.json';
 
-const { title = site.meta.title, description = site.meta.description } = Astro.props as {
+const {
+  title = site.meta.title,
+  description = site.meta.description,
+  keywords = site.meta.keywords,
+  jsonld = [],
+} = Astro.props as {
   title?: string;
   description?: string;
+  keywords?: string[];
+  // Extra schema.org objects for this page (e.g. an FAQPage); Organization and WebSite are always added.
+  jsonld?: Record<string, unknown>[];
 };
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
 const ogImage = new URL('/og.png', Astro.site).toString();
+const home = new URL('/', Astro.site).toString();
+const structured = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': `${home}#organization`,
+    name: 'Simbly Pet',
+    url: home,
+    logo: new URL('/apple-touch-icon.png', Astro.site).toString(),
+    slogan: site.footer.tagline,
+    parentOrganization: { '@type': 'Organization', name: site.company.name },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Simbly Pet',
+    url: home,
+    inLanguage: 'en-IN',
+    publisher: { '@id': `${home}#organization` },
+  },
+  ...jsonld.map((o) => ({ '@context': 'https://schema.org', ...o })),
+];
 ---
 <!doctype html>
 <html lang="en">
@@ -18,17 +48,25 @@ const ogImage = new URL('/og.png', Astro.site).toString();
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {keywords.length > 0 && <meta name="keywords" content={keywords.join(', ')} />}
+    <meta name="robots" content="index, follow, max-image-preview:large" />
     <link rel="canonical" href={canonical} />
     <meta name="theme-color" content="#FFBB03" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Simbly Pet" />
+    <meta property="og:locale" content="en_IN" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Simbly Pet: Pet Care Made Simbly Effortless" />
     <meta name="twitter:card" content="summary_large_image" />
+    <link rel="sitemap" href="/sitemap.xml" />
+    <script type="application/ld+json" set:html={JSON.stringify(structured)} />
     <!-- Hide reveal targets only when motion is allowed and JS runs, so content is never stuck invisible. -->
     <script is:inline>
       if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {

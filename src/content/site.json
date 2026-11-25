@@ -1,7 +1,28 @@
 {
   "meta": {
-    "title": "Simbly Pet: Pet Care Made Simbly Effortless",
-    "description": "Keep your pet's health records, vaccinations and reminders in one place, share them with family, and book grooming, boarding and daycare with trusted local businesses."
+    "title": "Simbly Pet: Dog & Cat Care App for Health Records and Bookings",
+    "description": "Keep your pet's health records, vaccinations and reminders in one place, share them with family, and book grooming, boarding and daycare with trusted local businesses.",
+    "keywords": [
+      "pet care app",
+      "pet care app India",
+      "dog care app",
+      "cat care app",
+      "pet health records app",
+      "pet vaccination reminder",
+      "dog vaccination tracker",
+      "pet medical records",
+      "pet reminder app",
+      "pet parent app",
+      "book pet grooming",
+      "dog grooming near me",
+      "pet boarding",
+      "dog boarding",
+      "pet daycare",
+      "dog daycare",
+      "pet health tracker",
+      "share pet records with family",
+      "Simbly Pet"
+    ]
   },
   "links": {
     "businessPortal": "https://business.simblypet.com",
@@ -220,7 +241,20 @@
   "businessPage": {
     "meta": {
       "title": "Simbly Pet for Businesses: bookings, staff and reports for pet care",
-      "description": "Groomers, boarders and daycares use Simbly Pet to take bookings, manage staff and branches, and send pet parents reports and photo updates."
+      "description": "Groomers, boarders and daycares use Simbly Pet to take bookings, manage staff and branches, and send pet parents reports and photo updates.",
+      "keywords": [
+        "pet business software",
+        "pet grooming software",
+        "grooming salon booking software",
+        "pet boarding software",
+        "kennel management software",
+        "dog daycare software",
+        "pet care booking system",
+        "pet business management app",
+        "pet salon appointment app",
+        "pet care CRM",
+        "Simbly Pet for business"
+      ]
     },
     "hero": {
       "eyebrow": "Simbly Pet for businesses",

@@ -7,13 +7,14 @@ import Icon from '../components/Icon.astro';
 import BizDashboard from '../components/BizDashboard.astro';
 import Contact from '../components/Contact.astro';
 import site from '../content/site.json';
+import { faqPage } from '../scripts/seo';
 
 const page = site.businessPage;
 const portal = site.links.businessPortal;
 const [titleLead, ...titleRest] = page.hero.title.split(' ');
 const titleEnd = titleRest.pop();
 ---
-<Base title={page.meta.title} description={page.meta.description}>
+<Base title={page.meta.title} description={page.meta.description} keywords={page.meta.keywords} jsonld={[faqPage(page.faq.items)]}>
   <Nav />
   <main id="main">
     <!-- Hero: dark, with the dashboard rising into view as you scroll (data-hero-stage → --p). -->

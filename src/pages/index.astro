@@ -12,8 +12,10 @@ import Faq from '../components/Faq.astro';
 import Download from '../components/Download.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
+import site from '../content/site.json';
+import { faqPage } from '../scripts/seo';
 ---
-<Base>
+<Base jsonld={[faqPage(site.faq.items)]}>
   <Nav />
   <main id="main">
     <Hero />

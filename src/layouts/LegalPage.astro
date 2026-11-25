@@ -17,7 +17,7 @@ interface Props {
 }
 const { title, description, eyebrow = 'Legal', heading, intro, toc = [], updated = true } = Astro.props;
 ---
-<Base title={title} description={description}>
+<Base title={title} description={description} keywords={[]}>
   <Nav />
   <main id="main" class="legal">
     <header class="legal__head">
